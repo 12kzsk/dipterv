@@ -1,0 +1,14 @@
+@relation trainingData
+
+@attribute attr0 numeric
+@attribute attr1 numeric
+@attribute attr2 numeric
+@attribute attr3 numeric
+@attribute attr4 numeric
+@attribute attr5 numeric
+
+@data
+1,2,3,4,5,0
+1,2,2,3,4,1
+1,2,3,3,4,1
+2,3,4,5,6,0

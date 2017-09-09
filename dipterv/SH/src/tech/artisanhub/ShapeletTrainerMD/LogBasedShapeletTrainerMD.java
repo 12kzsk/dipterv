@@ -1,0 +1,39 @@
+package tech.artisanhub.ShapeletTrainerMD;
+
+import java.util.ArrayList;
+import java.util.Properties;
+
+import tech.artisanhub.ShapeletTrainer1D.ShapeletInputTester;
+
+public class LogBasedShapeletTrainerMD {
+
+	//Main fv.: a log alapján megtalálja a shapeleteket
+	//Innen hívódik ennek a folyamatnak minden része
+	public static void main(String[] args) throws Exception {
+		//config file-ban a paraméterek nevei:
+		//a fájl nevek végzõdéssel együtt vannak megadva
+		/*
+		 	logFileName
+			trainingDataFileNameCsv
+			trainingDataFileNameArff
+			shapeletsFileName
+			minShapeletLength
+			maxShapeletLength
+			dimension
+			targetVariable
+			criticalThreshold
+			inputVariables (splitted: ,)
+		 */
+
+		//propertyk lekérdezése:
+		/*	Properties prop = new Properties();
+			InputStream input = null;
+			input = new FileInputStream("config.properties");
+			prop.load(input);
+		*/
+
+		LogProcessorMD.main(args);
+	
+	}
+
+}
