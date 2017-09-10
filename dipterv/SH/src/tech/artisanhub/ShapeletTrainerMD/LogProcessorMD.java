@@ -24,11 +24,11 @@ public class LogProcessorMD {
 
 		// magyarázó változók
 		ArrayList<String> inputVars = new ArrayList<String>();
-		for (int i = 9; i < args.length; i++) {
 			String inV = prop.getProperty("inputVariables");
 			String[] inputVariables = inV.split(",");
-			inputVars.add(inputVariables[i]);
-		}
+			for (int i = 0; i<inputVariables.length; i++){
+				inputVars.add(inputVariables[i]);
+			}
 
 		// átalakítjuk az arff fájllá alakításhoz megfelelõ formátumba az input log fájlunkat
 		// csv --> csv
@@ -54,11 +54,11 @@ public class LogProcessorMD {
 			// X: beolvasok 1 oszlopot a csv fájlból
 			ArrayList<ArrayList<Double>> X = new ArrayList<ArrayList<Double>>();
 			// timestamp oszlop
-			ArrayList<Integer> tsCol = new ArrayList<Integer>();
+			ArrayList<Double> tsCol = new ArrayList<Double>();
 			// van-e overlap, azaz egy mérésbõl vannak-e az adatok vagy sem
 			boolean overlap = false;
 
-			String splitBy = ",";
+			String splitBy = ";";
 
 			// elsõ sor beolvasása (header)
 			BufferedReader brX = new BufferedReader(new FileReader(inputFile));
@@ -82,13 +82,15 @@ public class LogProcessorMD {
 			boolean foundTsCol = false;
 			int tsColIndex = 0;
 			for (int h = 0; h < header.length; h++) {
-				// target
-				if (!(header[h].equals(prop.get("timestampColumnName")) && !foundTsCol)) {
+				String hdr = header[h];
+				String tsc = prop.get("timestampColumnName").toString();
+				if (!(hdr.equals(tsc)) && !foundTsCol) {
 					tsColIndex++;
 				}
-
-				if ((header[h].equals(prop.get("timestampColumnName")) && !foundTsCol)) {
+				
+				if (hdr.equals(tsc) && !foundTsCol) {
 					foundTsCol = true;
+					h = header.length; //ha megtalálta, lépjen ki
 				}
 			}
 
@@ -122,7 +124,6 @@ public class LogProcessorMD {
 			// ezeken kívül:
 			// Y: beolvasom a célváltozó értékét a csv fájlból
 			ArrayList<Double> Y = new ArrayList<Double>();
-
 			while ((line = brX.readLine()) != null) {
 				String[] b = line.split(splitBy);
 				// X = b[oszlopsorszam]
@@ -140,7 +141,7 @@ public class LogProcessorMD {
 
 				// timestamp oszlop feltöltése (0.oszlop)
 				// tsCol.add(Integer.parseInt(b[0]));
-				tsCol.add(Integer.parseInt(b[tsColIndex]));
+				tsCol.add(Double.parseDouble(b[tsColIndex]));
 
 				Y.add(Double.parseDouble(b[tarCol]));
 			}
@@ -178,10 +179,9 @@ public class LogProcessorMD {
 
 					// outputLine: ez lesz a fájl egy sora
 					StringBuilder outputLine = new StringBuilder();
-
 					// veszem az elsõ timeseriesLength mennyiségû adatot X-bõl
 					for (int i = k; i < (k + timeseriesLength); i++) {
-						for (int j = 0; j < X.size(); j++) {
+						for (int j = 0; j < X.get(i).size(); j++) {
 							outputLine.append(X.get(i).get(j) + ",");
 							if (k == 0) {
 								outputHeader.append("attr" + attNum + ",");
