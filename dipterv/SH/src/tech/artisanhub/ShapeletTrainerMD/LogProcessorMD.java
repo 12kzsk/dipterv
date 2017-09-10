@@ -198,9 +198,29 @@ public class LogProcessorMD {
 						Y1.add(Y.get(i));
 					}
 
+					// Y2: a classifierIntervalnak megfelelõ adatokat beleteszem az idõsor végérõl
+					// Y-ból
+					ArrayList<Double> Y2 = new ArrayList<Double>();
+					for (int i = k + timeseriesLength - classifierInterval; i < k + timeseriesLength ; i++) {
+						Y2.add(Y.get(i));
+					}
+
+					// összeszámoljuk, hogy hány van 1000 felett a tanító adatok végén
+					int  count = 0;
+					for (int x = 0; x < Y2.size(); x++) {
+						// ha mindegyik criticalThreshold felett van ezen a
+						// szakaszon, akkor lesz
+						// criticalClass osztályba tartozó
+						if (Y2.get(x) >= Integer.parseInt(prop.get("criticalThreshold").toString()))
+							count++;
+					}
+					
+					if (count < Y2.size()){
+						
+
 					// összeszámoljuk, hogy hány van 1000 felett ezen a
 					// szakaszon
-					int count = 0;
+					count = 0;
 					for (int x = 0; x < Y1.size(); x++) {
 						// ha mindegyik criticalThreshold felett van ezen a
 						// szakaszon, akkor lesz
@@ -229,6 +249,7 @@ public class LogProcessorMD {
 
 					// a fájl aktuálisan összeállított sorát kiírja
 					pw.write(outputLine.toString());
+					}
 				}
 
 			}
