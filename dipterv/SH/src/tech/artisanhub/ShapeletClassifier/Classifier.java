@@ -21,7 +21,8 @@ public class Classifier {
 	//ennek az eredményét összehasonlítja a shapelethez tartozó splitThresholddal(küszöb)
 	//params: 1 idõsor, shapelet, shapelethez tartozó osztály, shapelethez tartozó threshold, idõsorok elemeinek dimenziója
 	public String classifyLine(Instance ts, DoubleVectorMD[] sh, String shClass, double th, int dim) throws FileNotFoundException, IOException{
-        double dist = ShapeletFilterMD.subsequenceDistance(sh, ts, dim);
+ 
+		double dist = ShapeletFilterMD.subsequenceDistance(sh, ts, dim);
         
         if (dist <= th) return (shClass + " dist: " + dist); //shClass = class of the shapelet
 		else return ("NOT " + shClass + " dist: " + dist);

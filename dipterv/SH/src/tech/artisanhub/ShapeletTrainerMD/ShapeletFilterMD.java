@@ -254,9 +254,9 @@ public class ShapeletFilterMD {
 		int numInstances = data.numInstances();
 		for (int i = 0; i < numInstances; i++) {
 
-			if (i == 0 || i % (numInstances / 4) == 0) {
+			//if (i == 0 || i % (numInstances / 4) == 0) {
 				System.out.println("Currently processing instance " + (i + 1) + " of " + numInstances);
-			}
+			//}
 
 			// TODO: átalakítás
 			DoubleVectorMD[] wholeCandidate = doubleArrayToDoubleVectorArray(data.instance(i).toDoubleArray());
@@ -291,8 +291,9 @@ public class ShapeletFilterMD {
 					rawContent[length] = new DoubleVectorMD();
 					rawContent[length].setElement(0, data.instance(i).classValue());
 					candidate = zNorm(candidate, false);
-					ShapeletMD candidateShapelet = checkCandidate(candidate, data, i, start, classDistributions,
-							rawContent, dim); //TODO itt kell megnézni, hogy nagyobb-e az eddigi maxinfogainnél a shapelet infogainje és belerakni ha igen (a maxba)
+					//TODO itt kell megnézni, hogy nagyobb-e az eddigi maxinfogainnél a shapelet infogainje és belerakni ha igen (a maxba)
+					ShapeletMD candidateShapelet = checkCandidate(candidate, data, i, start, classDistributions, rawContent, dim);
+//					System.out.println(System.currentTimeMillis());
 					seriesShapelets.add(candidateShapelet);
 				}
 			}
@@ -612,7 +613,8 @@ public class ShapeletFilterMD {
 		shapelet.rawContent = rawContent;
 		shapelet.calcInfoGainAndThreshold(orderline, classDistribution);
 
-		if (shapelet.informationGain > maxInfoGain) //TODO ezt nem is itt kell nézni hanem kívül (emiatt át kell adni paramként a maxinfogaint)
+		if (shapelet.informationGain > maxInfoGain) 
+			//TODO ezt nem is itt kell nézni hanem kívül (emiatt át kell adni paramként a maxinfogaint)
 			maxInfoGain = shapelet.informationGain;
 		// note: early abandon entropy pruning would appear here, but has been
 		// ommitted
@@ -662,6 +664,7 @@ public class ShapeletFilterMD {
 			for (int j = i; j < i + candidate.length; j++) {
 				subseq[j - i] = timeSeries[j];
 			}
+			//System.out.println("time before: " + System.currentTimeMillis());
 			subseq = zNorm(subseq, false); // Z-NORM HERE
 			for (int j = 0; j < candidate.length; j++) {
 				for (int k = 0; k < dim; k++) {
@@ -671,6 +674,7 @@ public class ShapeletFilterMD {
 					}
 				}
 			}
+			//System.out.println("time after : " + System.currentTimeMillis());
 
 			if (sum < bestSum) {
 				bestSum = sum;

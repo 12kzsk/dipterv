@@ -13,7 +13,7 @@ import weka.core.Instances;
 public class LearnShapeletsMD
 {
 	public static String ARFFName = "";
-	public static Integer vectorSize = 1;
+	public static Integer vectorSize = 3;
 	
     public static void main( String[] args ) throws IOException{
     	// propertyk beolvasása

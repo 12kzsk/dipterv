@@ -14,10 +14,8 @@ public class CSVtoARFFMD {
 
     //private static final String TRAINING_DATA = "baseline_out.csv";
     //private static final String OUTPUT_DATA = "baseline_out.arff";
-	public static String TRAINING_DATA = "baseline_out.csv";
-    public static String OUTPUT_DATA = "baseline_out.arff";
-
-
+	public static String TRAINING_DATA = "";
+    public static String OUTPUT_DATA = "";
 
     public static void main(String[] args) throws Exception {
 

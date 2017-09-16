@@ -9,8 +9,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import tech.artisanhub.ARFFGenerator.CSVtoARFF;
-
 public class LogProcessorMD {
 	public static void main(String[] args) throws Exception {
 		// propertyk beolvasása
@@ -24,15 +22,17 @@ public class LogProcessorMD {
 
 		// magyarázó változók
 		ArrayList<String> inputVars = new ArrayList<String>();
-			String inV = prop.getProperty("inputVariables");
-			String[] inputVariables = inV.split(",");
-			for (int i = 0; i<inputVariables.length; i++){
-				inputVars.add(inputVariables[i]);
-			}
+		String inV = prop.getProperty("inputVariables");
+		String[] inputVariables = inV.split(",");
+		for (int i = 0; i < inputVariables.length; i++) {
+			inputVars.add(inputVariables[i]);
+		}
 
-		// átalakítjuk az arff fájllá alakításhoz megfelelõ formátumba az input log fájlunkat
+		// átalakítjuk az arff fájllá alakításhoz megfelelõ formátumba az input
+		// log fájlunkat
 		// csv --> csv
-		csvToCsvConverter(inputVars, prop.getProperty("targetVariable"), logFile);
+		csvToCsvConverter(inputVars, prop.getProperty("targetVariable"), logFile,
+				prop.getProperty("trainingDataFileNameCsv").toString());
 
 		// csv --> arff
 		CSVtoARFFMD.TRAINING_DATA = prop.getProperty("trainingDataFileNameCsv");
@@ -43,7 +43,8 @@ public class LogProcessorMD {
 		LearnShapeletsMD.main(args);
 	}
 
-	public static void csvToCsvConverter(ArrayList<String> vars, String tar, String inputFile) throws Exception {
+	public static void csvToCsvConverter(ArrayList<String> vars, String tar, String inputFile, String outputFile)
+			throws Exception {
 		// propertyk beolvasása
 		Properties prop = new Properties();
 		InputStream input = null;
@@ -87,10 +88,10 @@ public class LogProcessorMD {
 				if (!(hdr.equals(tsc)) && !foundTsCol) {
 					tsColIndex++;
 				}
-				
+
 				if (hdr.equals(tsc) && !foundTsCol) {
 					foundTsCol = true;
-					h = header.length; //ha megtalálta, lépjen ki
+					h = header.length; // ha megtalálta, lépjen ki
 				}
 			}
 
@@ -147,7 +148,7 @@ public class LogProcessorMD {
 			}
 			brX.close();
 
-			PrintWriter pw = new PrintWriter(new File(prop.getProperty("trainingDataFileNameCsv")));
+			PrintWriter pw = new PrintWriter(new File(outputFile));
 			StringBuilder outputHeader = new StringBuilder();
 			// segédváltozó: ahhoz szükséges, hogy
 			// a csvbõl szabályos arff fájlt lehessen csinálni
@@ -198,15 +199,17 @@ public class LogProcessorMD {
 						Y1.add(Y.get(i));
 					}
 
-					// Y2: a classifierIntervalnak megfelelõ adatokat beleteszem az idõsor végérõl
+					// Y2: a classifierIntervalnak megfelelõ adatokat beleteszem
+					// az idõsor végérõl
 					// Y-ból
 					ArrayList<Double> Y2 = new ArrayList<Double>();
-					for (int i = k + timeseriesLength - classifierInterval; i < k + timeseriesLength ; i++) {
+					for (int i = k + timeseriesLength - classifierInterval; i < k + timeseriesLength; i++) {
 						Y2.add(Y.get(i));
 					}
 
-					// összeszámoljuk, hogy hány van 1000 felett a tanító adatok végén
-					int  count = 0;
+					// összeszámoljuk, hogy hány van 1000 felett a tanító adatok
+					// végén
+					int count = 0;
 					for (int x = 0; x < Y2.size(); x++) {
 						// ha mindegyik criticalThreshold felett van ezen a
 						// szakaszon, akkor lesz
@@ -215,40 +218,38 @@ public class LogProcessorMD {
 							count++;
 					}
 					
-					if (count < Y2.size()){
-						
+					if (count < Y2.size()) {
+						// összeszámoljuk, hogy hány van 1000 felett ezen a
+						// szakaszon
+						count = 0;
+						for (int x = 0; x < Y1.size(); x++) {
+							// ha mindegyik criticalThreshold felett van ezen a
+							// szakaszon, akkor lesz
+							// criticalClass osztályba tartozó
+							if (Y1.get(x) >= Integer.parseInt(prop.get("criticalThreshold").toString()))
+								count++;
+						}
 
-					// összeszámoljuk, hogy hány van 1000 felett ezen a
-					// szakaszon
-					count = 0;
-					for (int x = 0; x < Y1.size(); x++) {
-						// ha mindegyik criticalThreshold felett van ezen a
-						// szakaszon, akkor lesz
-						// criticalClass osztályba tartozó
-						if (Y1.get(x) >= Integer.parseInt(prop.get("criticalThreshold").toString()))
-							count++;
-					}
+						if (count == Y1.size()) {
+							outputLine.append(prop.get("criticalClass").toString() + "\n");
+						} else {
+							outputLine.append(prop.get("normalClass").toString() + "\n");
+						}
 
-					if (count == Y1.size()) {
-						outputLine.append(prop.get("criticalClass").toString() + "\n");
-					} else {
-						outputLine.append(prop.get("normalClass").toString() + "\n");
-					}
+						// ahhoz, hogy a csv-t szabályos arff fájllá lehessen
+						// alakítani,
+						// kellenek attribútumnevek
+						// ez az osztály attribútumneve
+						if (k == 0) {
+							outputHeader.append("attr" + attNum + "\n");
+							attNum++;
 
-					// ahhoz, hogy a csv-t szabályos arff fájllá lehessen
-					// alakítani,
-					// kellenek attribútumnevek
-					// ez az osztály attribútumneve
-					if (k == 0) {
-						outputHeader.append("attr" + attNum + "\n");
-						attNum++;
+							// a legelején írja ki a headert is az output fájlba
+							pw.write(outputHeader.toString());
+						}
 
-						// a legelején írja ki a headert is az output fájlba
-						pw.write(outputHeader.toString());
-					}
-
-					// a fájl aktuálisan összeállított sorát kiírja
-					pw.write(outputLine.toString());
+						// a fájl aktuálisan összeállított sorát kiírja
+						pw.write(outputLine.toString());
 					}
 				}
 

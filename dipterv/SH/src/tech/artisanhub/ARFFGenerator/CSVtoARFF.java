@@ -25,10 +25,7 @@ public class CSVtoARFF {
 		InputStream input = null;
 		input = new FileInputStream("config.properties");
 		prop.load(input);
-		
-		TRAINING_DATA = prop.getProperty("trainingDataFileNameCsv");
-		OUTPUT_DATA = prop.getProperty("trainingDataFileNameArff");
-		
+				
         // load CSV
         CSVLoader loader = new CSVLoader();
         loader.setSource(new File(TRAINING_DATA));
