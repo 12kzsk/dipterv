@@ -40,7 +40,7 @@ public class Classify {
 			inputVars.add(inputVariables[i]);
 		}
 
-		//LogProcessorMD.csvToCsvConverter(inputVars, prop.getProperty("targetVariable"), prop.getProperty("inputDataOriginalFileNameCsv"), prop.getProperty("inputDataFileNameCsv"));
+		LogProcessorMD.csvToCsvConverter(inputVars, prop.getProperty("targetVariable"), prop.getProperty("inputDataOriginalFileNameCsv"), prop.getProperty("inputDataFileNameCsv"));
 		
 		// csv to arff
 		CSVtoARFF.TRAINING_DATA = prop.getProperty("inputDataFileNameCsv");
@@ -96,7 +96,7 @@ public class Classify {
 
 			writer = new BufferedWriter(new FileWriter(outPut));
 
-			Double d = dataSet.instance(0).value(0);
+			Double d = Double.parseDouble(prop.getProperty("dimension").toString());
 			int dim = d.intValue();
 
 			for (int i = 1; i < dataSet.numInstances(); i++) {

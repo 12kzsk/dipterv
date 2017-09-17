@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/dipterv1_ws/jcommon-1.0.8.jar"/>
-	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/dipterv1_ws/jfreechart.jar"/>
-	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/dipterv1_ws/weka.jar"/>
+	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/jcommon-1.0.8.jar"/>
+	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/jfreechart.jar"/>
+	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/weka.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

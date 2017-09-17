@@ -17,8 +17,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
 
-public class ShapeletFilterMD {
 
+
+public class ShapeletFilterMD {
+	
 	private int minShapeletLength;
 	private int maxShapeletLength;
 	private int numShapelets;
@@ -258,6 +260,7 @@ public class ShapeletFilterMD {
 				System.out.println("Currently processing instance " + (i + 1) + " of " + numInstances);
 			//}
 
+				
 			// TODO: átalakítás
 			DoubleVectorMD[] wholeCandidate = doubleArrayToDoubleVectorArray(data.instance(i).toDoubleArray());
 
@@ -293,7 +296,7 @@ public class ShapeletFilterMD {
 					candidate = zNorm(candidate, false);
 					//TODO itt kell megnézni, hogy nagyobb-e az eddigi maxinfogainnél a shapelet infogainje és belerakni ha igen (a maxba)
 					ShapeletMD candidateShapelet = checkCandidate(candidate, data, i, start, classDistributions, rawContent, dim);
-//					System.out.println(System.currentTimeMillis());
+
 					seriesShapelets.add(candidateShapelet);
 				}
 			}
@@ -488,7 +491,6 @@ public class ShapeletFilterMD {
 	//NEM egy candidatenél kell nézni a maxInfoGaint, hanem a candidateek között --> át kell adni paraméterként az eddigi maxot
 	private static ShapeletMD checkCandidate(DoubleVectorMD[] candidate, Instances data, int seriesId, int startPos,
 			TreeMap classDistribution, DoubleVectorMD[] rawContent, int dim) {
-
 		// create orderline by looping through data set and calculating the
 		// subsequence
 		// distance from candidate to all data, inserting in order.
@@ -502,6 +504,7 @@ public class ShapeletFilterMD {
 		for (int i = 0; i < data.numInstances(); i++) {
 			if (!endFor) {
 				double distance = subsequenceDistance(candidate, data.instance(i), dim);
+				
 				double classVal = data.instance(i).classValue();
 
 				if (maxDist < distance)
@@ -622,6 +625,7 @@ public class ShapeletFilterMD {
 		// be added in
 		// this method in the future for speed up, but distance early abandon is
 		// more important
+		
 		return shapelet;
 	}
 
@@ -664,8 +668,11 @@ public class ShapeletFilterMD {
 			for (int j = i; j < i + candidate.length; j++) {
 				subseq[j - i] = timeSeries[j];
 			}
-			//System.out.println("time before: " + System.currentTimeMillis());
+			
+			
+			
 			subseq = zNorm(subseq, false); // Z-NORM HERE
+			
 			for (int j = 0; j < candidate.length; j++) {
 				for (int k = 0; k < dim; k++) {
 					if (sum < bestSum) { // this line: early abandon done
@@ -674,7 +681,6 @@ public class ShapeletFilterMD {
 					}
 				}
 			}
-			//System.out.println("time after : " + System.currentTimeMillis());
 
 			if (sum < bestSum) {
 				bestSum = sum;
@@ -703,7 +709,7 @@ public class ShapeletFilterMD {
 			output[k] = new DoubleVectorMD();
 		}
 
-		for (int j = 0; j < LearnShapeletsMD.vectorSize; j++) {
+		for (int j = 0; j < LearnShapeletsMD.vectorSize; j++) { //TODO
 			double seriesTotal = 0;
 
 			for (int i = 0; i < input.length - classValPenalty; i++) {
@@ -716,7 +722,7 @@ public class ShapeletFilterMD {
 				stdv += (input[i].getElement(j) - mean) * (input[i].getElement(j) - mean);
 			}
 
-			stdv = stdv / input.length - classValPenalty;
+			stdv = stdv / (input.length - classValPenalty);
 			stdv = Math.sqrt(stdv);
 
 			for (int i = 0; i < input.length - classValPenalty; i++) {

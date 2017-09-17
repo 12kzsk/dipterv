@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class DoubleVectorMD {
 	public DoubleVectorMD() {
-		// Propertyk beolvasása
+/*		// Propertyk beolvasása
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
@@ -18,9 +18,9 @@ public class DoubleVectorMD {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+*/
 		//doubleVector = new Double[Integer.parseInt(prop.get("dimension").toString())];
-		doubleVector = new Double[LearnShapeletsMD.vectorSize];
+		doubleVector = new Double[LearnShapeletsMD.vectorSize]; //TODO
 	}
 
 	private Double[] doubleVector = null;
