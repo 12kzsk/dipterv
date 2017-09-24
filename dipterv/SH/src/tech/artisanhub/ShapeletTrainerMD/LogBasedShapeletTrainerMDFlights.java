@@ -12,6 +12,7 @@ public class LogBasedShapeletTrainerMDFlights {
 	//Main fv.: a log alapján megtalálja a shapeleteket
 	//Innen hívódik ennek a folyamatnak minden része
 	public static void main(String[] args) throws Exception {
+		FlightDataProcessor.main(args);
 		// propertyk beolvasása
 				Properties prop = new Properties();
 				InputStream input = null;
