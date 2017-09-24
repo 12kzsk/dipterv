@@ -16,6 +16,7 @@ import java.util.Properties;
 import tech.artisanhub.ARFFGenerator.CSVtoARFF;
 import tech.artisanhub.ShapeletTrainer1D.ShapeletFilter;
 import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
+import tech.artisanhub.ShapeletTrainerMD.LearnShapeletsMD;
 import tech.artisanhub.ShapeletTrainerMD.LogProcessorMD;
 import tech.artisanhub.ShapeletTrainerMD.ShapeletFilterMD;
 import weka.core.Instance;
@@ -40,12 +41,14 @@ public class Classify {
 			inputVars.add(inputVariables[i]);
 		}
 
-		LogProcessorMD.csvToCsvConverter(inputVars, prop.getProperty("targetVariable"), prop.getProperty("inputDataOriginalFileNameCsv"), prop.getProperty("inputDataFileNameCsv"));
+		//LogProcessorMD.csvToCsvConverter(inputVars, prop.getProperty("targetVariable"), prop.getProperty("inputDataOriginalFileNameCsv"), prop.getProperty("inputDataFileNameCsv"));
 		
 		// csv to arff
 		CSVtoARFF.TRAINING_DATA = prop.getProperty("inputDataFileNameCsv");
 		CSVtoARFF.OUTPUT_DATA = prop.getProperty("inputDataFileNameArff");
 		CSVtoARFF.main(args);
+		
+		LearnShapeletsMD.vectorSize = Integer.parseInt(prop.getProperty("dimension"));
 		
 		// TODO NEXT: classify line-t hívjuk soronként, soronként olvasunk a
 		// fájlból, a shapeletet csak egyszer olvassuk be - ezt kéne
