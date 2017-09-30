@@ -22,6 +22,10 @@ public class DoubleVectorMD {
 		//doubleVector = new Double[Integer.parseInt(prop.get("dimension").toString())];
 		doubleVector = new Double[LearnShapeletsMD.vectorSize]; //TODO
 	}
+	
+	public DoubleVectorMD(Integer d) {
+		doubleVector = new Double[d];
+	}
 
 	private Double[] doubleVector = null;
 

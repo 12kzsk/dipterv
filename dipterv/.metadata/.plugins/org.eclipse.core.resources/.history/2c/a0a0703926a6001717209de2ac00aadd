@@ -1,0 +1,28 @@
+package com.sample;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import tech.artisanhub.ShapeletClassifier.Classifier;
+import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
+import weka.core.Instance;
+import weka.core.SparseInstance;
+
+public class TimeSerieClassifier {
+	public boolean isCritical(DoubleVectorMD vector) throws FileNotFoundException, IOException{
+		boolean isCrit;
+		double[] dArr = new double[vector.getDoubleVector().length];
+		for (int x = 0; x < dArr.length; x++){
+			dArr[x] = vector.getElement(x).doubleValue();
+		}
+		
+		Instance ts = new SparseInstance(1.0, dArr);
+		
+		Classifier cl = new Classifier();
+		
+		cl.classifyLine(ts, DroolsTest.shapelet, DroolsTest.cls, DroolsTest.th, DroolsTest.dimension);
+		
+		return isCrit;
+	}
+}

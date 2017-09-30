@@ -1,15 +1,22 @@
 package com.sample
  
-import com.sample.DroolsTest.TimeSerie;
+import com.sample.DroolsTest.LogItem;
+import com.sample.TimeSerieClassifier;
  
-rule "TS"
+rule "critical"
     when
-        ts : TimeSerie()
+        LogItem(item : getLogItem())
+        eval(TimeSerieClassifier.isCritical(item))
     then
-        System.out.println( ts.getData() );
-        ts.setData( "Goodbye cruel world" );
-        update( ts );
-        System.out.println( ts.getData() );
+        System.out.println( "kritikus" );
+end
+
+rule "normal"
+    when
+        LogItem(item : getLogItem())
+        eval(!TimeSerieClassifier.isCritical(item))
+    then
+        System.out.println( "normal" );
 end
 
 /*

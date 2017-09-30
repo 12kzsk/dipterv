@@ -1,0 +1,52 @@
+package com.sample;
+
+import java.util.ArrayList;
+
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
+
+import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
+
+/**
+ * This is a sample class to launch a rule.
+ */
+public class DroolsTest {
+
+    public static final void main(String[] args) {
+        try {
+            // load up the knowledge base
+	        KieServices ks = KieServices.Factory.get();
+    	    KieContainer kContainer = ks.getKieClasspathContainer();
+        	KieSession kSession = kContainer.newKieSession("ksession-rules");
+
+            // go !
+        	LogItem ts = new LogItem();
+            ts.setData("1,1;4,2;7,3;0");
+            kSession.insert(ts);
+            kSession.fireAllRules();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+    }
+
+    public static class LogItem {
+
+    	public LogItem(Integer dimension){
+    		this.logItem = new DoubleVectorMD(dimension);
+    	}
+    	
+    	
+        private DoubleVectorMD logItem;
+
+        public DoubleVectorMD getData() {
+            return this.logItem;
+        }
+
+        public void setData(DoubleVectorMD logItem) {
+            this.logItem = logItem;
+        }
+
+    }
+
+}

@@ -1,0 +1,71 @@
+package com.sample;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Properties;
+
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
+
+import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
+
+/**
+ * This is a sample class to launch a rule.
+ */
+public class DroolsTest {
+
+    public static final void main(String[] args) {
+        try {
+            // load up the knowledge base
+	        KieServices ks = KieServices.Factory.get();
+    	    KieContainer kContainer = ks.getKieClasspathContainer();
+        	KieSession kSession = kContainer.newKieSession("ksession-rules");
+
+            // go !
+        	
+        	Properties prop = new Properties();
+    		InputStream input = null;
+    		try {
+    			input = new FileInputStream("/SH/config.properties");
+    			prop.load(input);
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    		Integer dimension = new Integer(prop.get("dimension").toString());
+        	
+        	LogItem logItem = new LogItem(dimension);
+        	DoubleVectorMD inVec = new DoubleVectorMD(dimension);
+        	
+        	inVec.setElement(i, element);
+            
+        	logItem.setLogItem(inVec);
+            kSession.insert(logItem);
+            kSession.fireAllRules();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+    }
+
+    public static class LogItem {
+
+    	public LogItem(Integer dimension){
+    		this.logItem = new DoubleVectorMD(dimension);
+    	}
+    	
+    	
+        private DoubleVectorMD logItem;
+
+        public DoubleVectorMD getLogItem() {
+            return this.logItem;
+        }
+
+        public void setLogItem(DoubleVectorMD logItem) {
+            this.logItem = logItem;
+        }
+
+    }
+
+}

@@ -5,7 +5,6 @@ INDEX VERSION 1.130+C:\Users\Zsuzsi\git\dipterv\.metadata\.plugins\org.eclipse.j
 3396576898.index
 533580263.index
 2336919671.index
-3068007062.index
 605358718.index
 1143168825.index
 2775358354.index
@@ -100,8 +99,6 @@ INDEX VERSION 1.130+C:\Users\Zsuzsi\git\dipterv\.metadata\.plugins\org.eclipse.j
 3422126029.index
 2345370329.index
 2151061454.index
-1618574077.index
-1857186177.index
 1394075560.index
 2903952346.index
 789877541.index

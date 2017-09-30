@@ -5,5 +5,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="DROOLS/Drools"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SH"/>
+	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/jcommon-1.0.8.jar"/>
+	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/jfreechart.jar"/>
+	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/weka.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

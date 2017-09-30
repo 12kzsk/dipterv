@@ -1,0 +1,13 @@
+package com.sample;
+
+import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
+
+public class TimeSerieClassifier {
+	public boolean isCritical(DoubleVectorMD vector){
+		boolean isCrit;
+		
+		DroolsTest.shapelet;
+		
+		return isCrit;
+	}
+}

@@ -1,0 +1,21 @@
+package com.sample;
+
+import java.io.FileReader;
+
+import tech.artisanhub.ShapeletClassifier.Classifier;
+import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
+import weka.core.Instance;
+
+public class TimeSerieClassifier {
+	public boolean isCritical(DoubleVectorMD vector){
+		boolean isCrit;
+
+		Instance ts = new Instance();
+		
+		Classifier cl = new Classifier();
+		
+		cl.classifyLine(Instance ts, DroolsTest.shapelet, DroolsTest.cls, DroolsTest.th, DroolsTest.dimension);
+		
+		return isCrit;
+	}
+}
