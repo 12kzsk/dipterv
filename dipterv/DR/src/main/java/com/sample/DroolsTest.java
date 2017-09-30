@@ -1,57 +1,33 @@
 package com.sample;
 
-import org.kie.api.KieServices;
-import org.kie.api.runtime.KieContainer;
-import org.kie.api.runtime.KieSession;
+import java.util.Collection;
 
 /**
  * This is a sample class to launch a rule.
  */
 public class DroolsTest {
 
-    public static final void main(String[] args) {
-        try {
-            // load up the knowledge base
-	        KieServices ks = KieServices.Factory.get();
-    	    KieContainer kContainer = ks.getKieClasspathContainer();
-        	KieSession kSession = kContainer.newKieSession("ksession-rules");
+	public static void main(String[] args) {
+		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 
-            // go !
-            Message message = new Message();
-            message.setMessage("Hello World");
-            message.setStatus(Message.HELLO);
-            kSession.insert(message);
-            kSession.fireAllRules();
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-    }
+		// this will parse and compile in one step
+		kbuilder.add(ResourceFactory.newClassPathResource("HelloWorld.drl",
+		        HelloWorldExample.class), ResourceType.DRL);
 
-    public static class Message {
+		// Check the builder for errors
+		if (kbuilder.hasErrors()) {
+		    System.out.println(kbuilder.getErrors().toString());
+		    throw new RuntimeException("Unable to compile \"HelloWorld.drl\".");
+		}
 
-        public static final int HELLO = 0;
-        public static final int GOODBYE = 1;
 
-        private String message;
+		// get the compiled packages (which are serializable)
+		final Collection<KiePackage> pkgs = kbuilder.getKnowledgePackages();
 
-        private int status;
-
-        public String getMessage() {
-            return this.message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public int getStatus() {
-            return this.status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }
-
-    }
+		// add the packages to a knowledgebase (deploy the knowledge packages).
+		final KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		kbase.addKnowledgePackages(pkgs);
+		final StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+	}
 
 }
