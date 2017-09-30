@@ -1,0 +1,21 @@
+package com.sample
+ 
+import com.sample.DroolsTest.TimeSerie;
+ 
+rule "TS"
+    when
+        ts : TimeSerie()
+    then
+        System.out.println( ts.getData() );
+        ts.setData( "Goodbye cruel world" );
+        update( ts );
+end
+
+/*
+rule "GoodBye"
+    when
+        Message( status == Message.GOODBYE, myMessage : message )
+    then
+        System.out.println( myMessage );
+end
+*/
