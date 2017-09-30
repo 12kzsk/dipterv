@@ -1,0 +1,21 @@
+package com.sample
+ 
+import com.sample.DroolsTest.LogItem;
+import com.sample.TimeSerieClassifier;
+ 
+rule "TS"
+    when
+        LogItem(item : getLogItem())
+        crit : TimeSerieClassifier.isCritical(item)
+    then
+        System.out.println(  );
+end
+
+/*
+rule "GoodBye"
+    when
+        Message( status == Message.GOODBYE, myMessage : message )
+    then
+        System.out.println( myMessage );
+end
+*/
