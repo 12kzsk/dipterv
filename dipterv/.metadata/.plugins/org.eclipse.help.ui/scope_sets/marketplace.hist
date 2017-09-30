@@ -1,0 +1,6 @@
+#Sat Sep 30 15:19:39 CEST 2017
+__DEFAULT__=false
+org.eclipse.help.ui.localSearch.master=true
+org.hibernate.eclipse.help.HibernateWiki.master=true
+expression=marketplace
+org.jboss.tools.developer.search.master=true

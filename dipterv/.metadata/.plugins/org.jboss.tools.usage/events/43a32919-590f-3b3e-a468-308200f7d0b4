@@ -1,0 +1,11 @@
+#Sat Sep 30 18:49:56 CEST 2017
+vl=How many times the 'Finish' button pressed during the day
+l=Wizard class name
+ct=jbt
+d=1506790196668
+c=0
+cmp=usage
+a=finishWizard
+cl=org.drools.eclipse.wizard.project.NewDroolsProjectWizard
+v=2.2.3
+s=1

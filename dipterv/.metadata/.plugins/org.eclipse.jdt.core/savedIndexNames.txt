@@ -1,0 +1,17 @@
+INDEX VERSION 1.130+C:\Users\Zsuzsi\git\dipterv\.metadata\.plugins\org.eclipse.jdt.core
+522619044.index
+1857186177.index
+4072378400.index
+4121715409.index
+1937164787.index
+3068007062.index
+91674010.index
+1800165001.index
+1618574077.index
+2789866534.index
+828143067.index
+2884839085.index
+4022413039.index
+1670546666.index
+3243427971.index
+1112490718.index

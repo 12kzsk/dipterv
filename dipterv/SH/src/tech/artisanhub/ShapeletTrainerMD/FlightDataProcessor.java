@@ -1,20 +1,32 @@
 package tech.artisanhub.ShapeletTrainerMD;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Properties;
+
 
 public class FlightDataProcessor {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 		ArrayList<ArrayList<String>> lines = CSVReader.read("BUDflights2007-2012v2.csv", ";");
 		
+    	// propertyk beolvasása
+    	Properties prop = new Properties();
+    	InputStream input = null;
+    	input = new FileInputStream("config.properties");
+    	prop.load(input);
+    	
+        int dim = Integer.parseInt(prop.get("dimension").toString());
 		//lengthOfTS elemú az idõsor, timeWindow db hónapot nézünk
 		//és a rákövetkezõ (timeWindow+1.) hónap alapján határozzuk meg, 
 		//hogy kritikus helyzet van-e
 		//akkor van krit. helyzet, ha a timeWindow darab elemnek az átlagánál nagyobb a tw+1.
-		int lengthOfTS = 6;
+		int lengthOfTS = 12;
 		int timeWindow = 6;
 		
 		//le van rendezve repülõtér szerint - ez elvárás a csv-vel szemben
@@ -96,11 +108,11 @@ public class FlightDataProcessor {
 				monthData.add(0);
 				monthData.add(0);
 				//pl. 201702 formátumból a 02-t kivesszük
-				//monthData.add(month % 100);
-				monthData.add(0); //TODO visszaállítani
+				monthData.add(month % 100);
+				//monthData.add(0); //TODO visszaállítani
 				//negyedév sorszámának hozzáadása
-				//monthData.add(quarter);
-				monthData.add(0); //TODO visszaállítani
+				monthData.add(quarter);
+				//monthData.add(0); //TODO visszaállítani
 				//hozzáadjuk a procLines adott reptérhez tartozó eleméhez az aktuális hónaphoz tartozó vektort
 				procLines.get(airportIndex).add(monthData);
 				lastMonth = month;
@@ -122,10 +134,10 @@ public class FlightDataProcessor {
 		StringBuilder outputHeader = new StringBuilder();
 		
 		//header
-		for (int i = 0; i < lengthOfTS * 5; i++){
+		for (int i = 0; i < lengthOfTS * dim; i++){
 			outputHeader.append("attr"+ i + ",");
 		}
-		outputHeader.append("attr"+ lengthOfTS * 5 + "\n");
+		outputHeader.append("attr"+ lengthOfTS * dim + "\n");
 		pw.write(outputHeader.toString());
 		
 		//egy reptér
@@ -143,6 +155,8 @@ public class FlightDataProcessor {
 					//n-nel a vektor elemein megyünk végig
 					for (int n = 0; n < procLines.get(i).get(k).size(); n++) {
 						//i. reptér k. hónapjának n. vektorelemét írjuk ki
+//						if (n >= 3) 
+						if (n==3 || n==4)
 						outputLine.append(procLines.get(i).get(k).get(n) + ",");
 					}
 					//azért lesz itt get(0), mert a 0. az utasok száma
