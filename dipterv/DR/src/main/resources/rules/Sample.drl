@@ -1,20 +1,22 @@
 package com.sample
  
-import com.sample.DroolsTest.Message;
+import com.sample.DroolsTest.TimeSerie;
  
-rule "Hello World"
+rule "TS"
     when
-        m : Message( status == Message.HELLO, myMessage : message )
+        ts : TimeSerie()
     then
-        System.out.println( myMessage );
-        m.setMessage( "Goodbye cruel world" );
-        m.setStatus( Message.GOODBYE );
-        update( m );
+        System.out.println( ts.getData() );
+        ts.setData( "Goodbye cruel world" );
+        update( ts );
+        System.out.println( ts.getData() );
 end
 
+/*
 rule "GoodBye"
     when
         Message( status == Message.GOODBYE, myMessage : message )
     then
         System.out.println( myMessage );
 end
+*/
