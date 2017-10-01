@@ -657,9 +657,10 @@ public class ShapeletFilterMD {
 		double bestSum = Double.MAX_VALUE;
 		double sum = 0;
 		DoubleVectorMD[] subseq;
-
-		// for all possible subsequences of two
-		for (int i = 0; i <= timeSeries.length - candidate.length - 1; i++) {
+		
+		// for all possible subsequences of two //TODO VISSZARAKNI A -1et!!!!!!!
+//		for (int i = 0; i <= timeSeries.length - candidate.length - 1; i++) {
+		for (int i = 0; i <= timeSeries.length - candidate.length; i++) {
 
 			sum = 0;
 			// get subsequence of two that is the same lenght as one
@@ -668,8 +669,6 @@ public class ShapeletFilterMD {
 			for (int j = i; j < i + candidate.length; j++) {
 				subseq[j - i] = timeSeries[j];
 			}
-			
-			
 			
 			subseq = zNorm(subseq, false); // Z-NORM HERE
 			

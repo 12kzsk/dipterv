@@ -18,11 +18,12 @@ public class TimeSerieClassifier {
 	public static boolean isCritical(DoubleVectorMD vector) throws FileNotFoundException, IOException {
 		boolean isCrit = false;
 		
-		int tsLength = 11; // TODO
+		int tsLength = DroolsTest.shapelet.length;
+		
 		// vector tömb rendezése
 		if (vectors == null)
 			vectors = new DoubleVectorMD[tsLength];
-		else if (vecSize < tsLength) {
+		if (vecSize < tsLength) {
 			vectors[vecSize] = vector;
 			vecSize++;
 		} else {
@@ -45,7 +46,7 @@ public class TimeSerieClassifier {
 
 			String cls = cl.classifyLine(ts, DroolsTest.shapelet, DroolsTest.cls, DroolsTest.th, DroolsTest.dimension);
 
-			if (cls.equals("1.0"))
+			if (cls.equals("NOT 0.0") || cls.equals("1.0"))
 				isCrit = true;
 			else
 				isCrit = false;

@@ -23,9 +23,9 @@ public class Classifier {
 	public String classifyLine(Instance ts, DoubleVectorMD[] sh, String shClass, double th, int dim) throws FileNotFoundException, IOException{
  
 		double dist = ShapeletFilterMD.subsequenceDistance(sh, ts, dim);
-        
-        if (dist <= th) return (shClass + " dist: " + dist); //shClass = class of the shapelet
-		else return ("NOT " + shClass + " dist: " + dist);
+		
+        if (dist <= th) return (shClass); //shClass = class of the shapelet
+		else return ("NOT " + shClass);
 	}
 	
 	//fv1: input-mx vagy csúszóablak tartalma mátrixban....

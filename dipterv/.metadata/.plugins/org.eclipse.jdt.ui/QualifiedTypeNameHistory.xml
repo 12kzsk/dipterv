@@ -7,7 +7,22 @@
 <fullyQualifiedTypeName name="org.kie.internal.builder.KnowledgeBuilderFactory"/>
 <fullyQualifiedTypeName name="org.kie.internal.io.ResourceFactory"/>
 <fullyQualifiedTypeName name="org.kie.api.io.ResourceType"/>
+<fullyQualifiedTypeName name="org.kie.api.definition.KiePackage"/>
 <fullyQualifiedTypeName name="org.drools.core.marshalling.impl.ProtobufMessages.KnowledgeBase"/>
 <fullyQualifiedTypeName name="org.drools.core.impl.KnowledgeBaseFactory"/>
 <fullyQualifiedTypeName name="org.kie.internal.runtime.StatefulKnowledgeSession"/>
+<fullyQualifiedTypeName name="org.kie.api.KieServices"/>
+<fullyQualifiedTypeName name="org.kie.api.runtime.KieContainer"/>
+<fullyQualifiedTypeName name="org.kie.api.runtime.KieSession"/>
+<fullyQualifiedTypeName name="org.kie.api.event.rule.DebugRuleRuntimeEventListener"/>
+<fullyQualifiedTypeName name="org.kie.api.event.rule.DebugAgendaEventListener"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD"/>
+<fullyQualifiedTypeName name="weka.core.Instances"/>
+<fullyQualifiedTypeName name="weka.core.SparseInstance"/>
+<fullyQualifiedTypeName name="weka.core.Instance"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

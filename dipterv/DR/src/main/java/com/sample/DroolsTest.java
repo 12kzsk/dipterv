@@ -15,6 +15,7 @@ import org.kie.api.runtime.KieSession;
 
 import tech.artisanhub.ShapeletTrainerMD.CSVReader;
 import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
+import tech.artisanhub.ShapeletTrainerMD.ShapeletFilterMD;
 
 /**
  * This is a sample class to launch a rule.
@@ -42,7 +43,9 @@ public class DroolsTest {
     		} catch (IOException e) {
     			e.printStackTrace();
     		}
-        	
+    		
+    		TimeSerieClassifier.vectors = null;
+    				
         	String shapeletSource = prop.getProperty("bestShapeletsFileName");
 
     		String line;
@@ -72,6 +75,9 @@ public class DroolsTest {
     			}
     		} catch (Exception e) {}
     		
+    		//normalize shapelet
+    		shapelet = ShapeletFilterMD.zNorm(shapelet, false);
+    		
         	//get input
         	ArrayList<ArrayList<String>> lines = CSVReader.read("input.csv", ";");
         	
@@ -88,11 +94,11 @@ public class DroolsTest {
 
             	logItem.setLogItem(inVec);
                 kSession.insert(logItem);
-                
+            	
+            	//szabályok kiértékelése
+                kSession.fireAllRules();
+   
         	}
-        	
-        	//szabályok kiértékelése
-            kSession.fireAllRules();
             
         } catch (Throwable t) {
             t.printStackTrace();
@@ -104,7 +110,6 @@ public class DroolsTest {
     	public LogItem(Integer dimension){
     		this.logItem = new DoubleVectorMD(dimension);
     	}
-    	
     	
         private DoubleVectorMD logItem;
 
