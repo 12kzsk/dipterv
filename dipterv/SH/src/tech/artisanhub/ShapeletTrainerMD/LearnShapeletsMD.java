@@ -31,7 +31,7 @@ public class LearnShapeletsMD
 
             //shapeletek száma
             int k = Integer.MAX_VALUE;
-            int minLength = 2;
+            int minLength = Integer.parseInt(prop.get("minShapeletLength").toString());
             //max hossz számított érték:
             //int maxLength = data.instance(1).numValues()-1;
             //max hossz paraméterezésbõl:

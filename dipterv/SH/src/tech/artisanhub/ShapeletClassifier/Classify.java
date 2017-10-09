@@ -44,9 +44,9 @@ public class Classify {
 		//LogProcessorMD.csvToCsvConverter(inputVars, prop.getProperty("targetVariable"), prop.getProperty("inputDataOriginalFileNameCsv"), prop.getProperty("inputDataFileNameCsv"));
 		
 		// csv to arff
-		CSVtoARFF.TRAINING_DATA = prop.getProperty("inputDataFileNameCsv");
+//		CSVtoARFF.TRAINING_DATA = prop.getProperty("inputDataFileNameCsv");
 		CSVtoARFF.OUTPUT_DATA = prop.getProperty("inputDataFileNameArff");
-		CSVtoARFF.main(args);
+//		CSVtoARFF.main(args);
 		
 		LearnShapeletsMD.vectorSize = Integer.parseInt(prop.getProperty("dimension"));
 		
@@ -102,7 +102,7 @@ public class Classify {
 			Double d = Double.parseDouble(prop.getProperty("dimension").toString());
 			int dim = d.intValue();
 
-			for (int i = 1; i < dataSet.numInstances(); i++) {
+			for (int i = 0; i < dataSet.numInstances(); i++) {
 				// azért 1tõl,mert a 0. sor a dimenzió
 				// params: 1 idõsor, shapelet, shapelethez tartozó osztály,
 				// shapelethez tartozó threshold, idõsorok elemeinek dimenziója
