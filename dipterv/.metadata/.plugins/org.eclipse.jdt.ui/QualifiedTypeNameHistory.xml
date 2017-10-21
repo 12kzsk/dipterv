@@ -25,4 +25,5 @@
 <fullyQualifiedTypeName name="weka.core.SparseInstance"/>
 <fullyQualifiedTypeName name="weka.core.Instance"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="tech.artisanhub.ShapeletTrainerMD.ShapeletFilterMD"/>
 </qualifiedTypeNameHistroy>

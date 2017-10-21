@@ -157,7 +157,7 @@ public class FlightDataProcessor {
 						//i. reptér k. hónapjának n. vektorelemét írjuk ki
 //						if (n >= 3) 
 						// 0: utasszám 1: járatdbszám 2:üléskapacitás 3:hónap 4:negyedév
-						if (n==0 || n==3)
+						if (n==0 || n==1 || n==2 || n==3 || n==4)
 						outputLine.append(procLines.get(i).get(k).get(n) + ",");
 					}
 					//azért lesz itt get(0), mert a 0. az utasok száma

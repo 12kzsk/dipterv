@@ -1,8 +1,0 @@
-package tech.artisanhub.EventProcessor;
-
-import java.util.Collection;
-
-public class EventProcessor {
-
-	
-}

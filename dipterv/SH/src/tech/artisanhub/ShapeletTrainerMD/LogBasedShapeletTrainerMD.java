@@ -1,5 +1,7 @@
 package tech.artisanhub.ShapeletTrainerMD;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -26,7 +28,8 @@ public class LogBasedShapeletTrainerMD {
 		 */
 
 		//propertyk lekérdezése:
-		/*	Properties prop = new Properties();
+		/*	
+			Properties prop = new Properties();
 			InputStream input = null;
 			input = new FileInputStream("config.properties");
 			prop.load(input);

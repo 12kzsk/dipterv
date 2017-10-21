@@ -1,0 +1,267 @@
+package tech.artisanhub.ShapeletTrainerMD;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Properties;
+
+public class LogProcessorMD {
+	public static void main(String[] args) throws Exception {
+		// propertyk beolvasása
+		Properties prop = new Properties();
+		InputStream input = null;
+		input = new FileInputStream("config.properties");
+		prop.load(input);
+
+		// log input fájl
+		String logFile = prop.getProperty("logFileName");
+
+		// magyarázó változók
+		ArrayList<String> inputVars = new ArrayList<String>();
+		String inV = prop.getProperty("inputVariables");
+		String[] inputVariables = inV.split(",");
+		for (int i = 0; i < inputVariables.length; i++) {
+			inputVars.add(inputVariables[i]);
+		}
+
+		// átalakítjuk az arff fájllá alakításhoz megfelelõ formátumba az input
+		// log fájlunkat
+		// csv --> csv
+		csvToCsvConverter(inputVars, prop.getProperty("targetVariable"), logFile,
+				prop.getProperty("trainingDataFileNameCsv").toString());
+
+		// csv --> arff
+		CSVtoARFFMD.TRAINING_DATA = prop.getProperty("trainingDataFileNameCsv");
+		CSVtoARFFMD.OUTPUT_DATA = prop.getProperty("trainingDataFileNameArff");
+		CSVtoARFFMD.main(args);
+
+		// learn shapelets
+		LearnShapeletsMD.main(args);
+	}
+
+	public static void csvToCsvConverter(ArrayList<String> vars, String tar, String inputFile, String outputFile)
+			throws Exception {
+		// propertyk beolvasása
+		Properties prop = new Properties();
+		InputStream input = null;
+		input = new FileInputStream("config.properties");
+		prop.load(input);
+
+		if (!(vars.contains((tar)))) {
+			// X: beolvasok 1 oszlopot a csv fájlból
+			ArrayList<ArrayList<Double>> X = new ArrayList<ArrayList<Double>>();
+			// timestamp oszlop
+			ArrayList<Double> tsCol = new ArrayList<Double>();
+			// van-e overlap, azaz egy mérésbõl vannak-e az adatok vagy sem
+			boolean overlap = false;
+
+			String splitBy = ";";
+
+			// elsõ sor beolvasása (header)
+			BufferedReader brX = new BufferedReader(new FileReader(inputFile));
+			String line = brX.readLine();
+			// header: változóneveket tartalmazza
+			String[] header = line.split(";");
+
+			// célváltozó oszlopának sorszáma
+			int tarCol = 0;
+			// input változók oszlopainak sorszámai
+			ArrayList<Integer> varCol = new ArrayList<Integer>();
+			for (int x = 0; x < vars.size(); x++) {
+				varCol.add(x, 0);
+			}
+
+			// segédváltozók
+			boolean foundTar = false;
+			boolean foundVar = false;
+
+			// timestamp oszlop indexének megkeresése
+			boolean foundTsCol = false;
+			int tsColIndex = 0;
+			for (int h = 0; h < header.length; h++) {
+				String hdr = header[h];
+				String tsc = prop.get("timestampColumnName").toString();
+				if (!(hdr.equals(tsc)) && !foundTsCol) {
+					tsColIndex++;
+				}
+
+				if (hdr.equals(tsc) && !foundTsCol) {
+					foundTsCol = true;
+					h = header.length; // ha megtalálta, lépjen ki
+				}
+			}
+
+			// megkeressük, hogy a célváltozó hányas indexû oszlopban van
+			for (int h = 0; h < header.length; h++) {
+				if (!(header[h].equals(tar)) && !foundTar) {
+					tarCol++;
+				}
+
+				if ((header[h].equals(tar)) && !foundTar) {
+					foundTar = true;
+				}
+			}
+
+			// megkeressük, hogy a magyarázó változó(k) hányas indexû
+			// oszlop(ok)ban vannak
+			for (int l = 0; l < varCol.size(); l++) {
+				foundVar = false;
+				for (int h = 0; h < header.length; h++) {
+					if ((header[h].equals(vars.get(l))) && !foundVar) {
+						varCol.set(l, h);
+						foundVar = true;
+					}
+				}
+			}
+
+			// minden sorból beolvassa a megadott változókhoz tartozó értékeket
+			// ezeket az X-hez adja,
+			// ez az X az összes vektort tartalmazza
+			// X: Double ArrayListek ArrayListje
+			// ezeken kívül:
+			// Y: beolvasom a célváltozó értékét a csv fájlból
+			ArrayList<Double> Y = new ArrayList<Double>();
+			while ((line = brX.readLine()) != null) {
+				String[] b = line.split(splitBy);
+				// X = b[oszlopsorszam]
+				ArrayList<Double> vector = new ArrayList<Double>();
+				for (int x = 0; x < varCol.size(); x++) {
+					try {
+						vector.add(Double.parseDouble(b[varCol.get(x)]));
+					} catch (Exception e) {
+						// ha nem szám van benne,
+						// rakjon bele -1-t
+						vector.add(-1.0);
+					}
+				}
+				X.add(vector);
+
+				// timestamp oszlop feltöltése (0.oszlop)
+				// tsCol.add(Integer.parseInt(b[0]));
+				tsCol.add(Double.parseDouble(b[tsColIndex]));
+
+				Y.add(Double.parseDouble(b[tarCol]));
+			}
+			brX.close();
+
+			PrintWriter pw = new PrintWriter(new File(outputFile));
+			StringBuilder outputHeader = new StringBuilder();
+			// segédváltozó: ahhoz szükséges, hogy
+			// a csvbõl szabályos arff fájlt lehessen csinálni
+			int attNum = 0;
+
+			int timeseriesLength = Integer.parseInt(prop.get("timeseriesLength").toString());
+			int classifierInterval = Integer.parseInt(prop.get("classifierInterval").toString());
+			int sampleGap = Integer.parseInt(prop.get("sampleGap").toString());
+
+			for (int k = 0; k < Y.size() - (timeseriesLength + classifierInterval + sampleGap); k++) {
+				overlap = false; // új minta, új esély
+
+				// megvizsgáljuk, hogy van-e overlap, azaz
+				// az idõablakban ne legyen két különbözõ mérésbõl adat
+				for (int i = k; i < (k + timeseriesLength + classifierInterval + sampleGap); i++) {
+					// azért kell a -1, mert az utolsó olyannál, amit vizsgálunk
+					// nincs még következõ vizsgálandó timestamp
+					if ((i < k + timeseriesLength + classifierInterval + sampleGap - 1)
+							&& (tsCol.get(i + 1) <= tsCol.get(i))) {
+						overlap = true;
+						i = k + timeseriesLength + classifierInterval + sampleGap;
+						// lépjen ki és az overlap maradjon true
+					}
+				}
+
+				// csak akkor írja ki, ha nem volt overlap,
+				// ha volt, keresse a következõ mintát
+				if (!overlap) {
+
+					// outputLine: ez lesz a fájl egy sora
+					StringBuilder outputLine = new StringBuilder();
+					// veszem az elsõ timeseriesLength mennyiségû adatot X-bõl
+					for (int i = k; i < (k + timeseriesLength); i++) {
+						for (int j = 0; j < X.get(i).size(); j++) {
+							outputLine.append(X.get(i).get(j) + ",");
+							if (k == 0) {
+								outputHeader.append("attr" + attNum + ",");
+								attNum++;
+							}
+						}
+					}
+
+					// Y1: a classifierIntervalnak megfelelõ adatokat beleteszem
+					// Y-ból
+					ArrayList<Double> Y1 = new ArrayList<Double>();
+					for (int i = k + timeseriesLength + sampleGap; i < k + timeseriesLength + classifierInterval
+							+ sampleGap; i++) {
+						Y1.add(Y.get(i));
+					}
+
+					// Y2: a classifierIntervalnak megfelelõ adatokat beleteszem
+					// az idõsor végérõl
+					// Y-ból
+					ArrayList<Double> Y2 = new ArrayList<Double>();
+					for (int i = k + timeseriesLength - classifierInterval; i < k + timeseriesLength; i++) {
+						Y2.add(Y.get(i));
+					}
+
+					// összeszámoljuk, hogy hány van 1000 felett a tanító adatok
+					// végén
+					boolean low = true; //adott határ alatti az egész idõsor szakasz
+					int count = 0;
+					for (int x = 0; x < Y2.size(); x++) {
+						// ha mindegyik criticalThreshold felett van ezen a
+						// szakaszon, akkor lesz
+						// criticalClass osztályba tartozó
+
+						if (Y2.get(x) >= Integer.parseInt(prop.get("lowLimit").toString()))
+							low = false;
+						if (Y2.get(x) >= Integer.parseInt(prop.get("criticalThreshold").toString()))
+							count++;
+					}
+					
+					if (count < Y2.size() || low) {
+						// összeszámoljuk, hogy hány van 1000 felett ezen a
+						// szakaszon
+						count = 0;
+						for (int x = 0; x < Y1.size(); x++) {
+							// ha mindegyik criticalThreshold felett van ezen a
+							// szakaszon, akkor lesz
+							// criticalClass osztályba tartozó
+							if (Y1.get(x) >= Integer.parseInt(prop.get("criticalThreshold").toString()))
+								count++;
+						}
+
+						if (count == Y1.size()) {
+							outputLine.append(prop.get("criticalClass").toString() + "\n");
+						} else {
+							outputLine.append(prop.get("normalClass").toString() + "\n");
+						}
+
+						// ahhoz, hogy a csv-t szabályos arff fájllá lehessen
+						// alakítani,
+						// kellenek attribútumnevek
+						// ez az osztály attribútumneve
+						if (k == 0) {
+							outputHeader.append("attr" + attNum + "\n");
+							attNum++;
+
+							// a legelején írja ki a headert is az output fájlba
+							pw.write(outputHeader.toString());
+						}
+
+						// a fájl aktuálisan összeállított sorát kiírja
+						pw.write(outputLine.toString());
+					}
+				}
+
+			}
+			// output fájl 1 sora:
+			// X1, illetve még 1:
+			// utána ha Y1 minden adata 1000 felett van, 1, egyébként 0
+			pw.close();
+		}
+	}
+}

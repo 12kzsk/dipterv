@@ -26,6 +26,8 @@ public class LogBasedShapeletTrainerMDFlights {
 		CSVtoARFFMD.OUTPUT_DATA = prop.getProperty("trainingDataFileNameArff");
 		CSVtoARFFMD.main(args);
 */
+		
+		
 		// learn shapelets
 		LearnShapeletsMD.main(args);	
 	}

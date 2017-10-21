@@ -316,7 +316,7 @@ public class ShapeletFilterMD {
 			// info)
 			FileWriter classOut = new FileWriter(this.classOutputFileLocation);
 			Double th = kShapelets.get(0).splitThreshold;
-			classOut.append(th.toString() + "#");
+			classOut.append(th.toString() + "#\n");
 
 			DoubleVectorMD[] shapeletRC = kShapelets.get(0).rawContent;
 
@@ -327,7 +327,7 @@ public class ShapeletFilterMD {
 					} else
 						classOut.append(shapeletRC[j].getElement(l) + ",");
 				}
-				classOut.append(";");
+				classOut.append("\n");
 			}
 			classOut.append(shapeletRC[shapeletRC.length - 1].getElement(0) + "\n");
 
