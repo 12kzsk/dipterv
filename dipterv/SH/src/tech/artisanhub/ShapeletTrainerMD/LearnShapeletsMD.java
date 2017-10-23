@@ -12,7 +12,8 @@ import weka.core.Instances;
 
 public class LearnShapeletsMD
 {
-	public static String ARFFName = "";
+	//public static String ARFFName = "";
+	public static String sourceName = "";
 	public static Integer vectorSize = 3;
 	
     public static void main( String[] args ) throws IOException{
@@ -22,12 +23,13 @@ public class LearnShapeletsMD
     	input = new FileInputStream("config.properties");
     	prop.load(input);
     	
-    	ARFFName = prop.get("trainingDataFileNameArff").toString();
+    	//ARFFName = prop.get("trainingDataFileNameArff").toString();
+		sourceName = prop.get("trainingDataFileNameCsv").toString();
     	vectorSize = Integer.parseInt(prop.get("dimension").toString());
     	
     	long startTime = System.currentTimeMillis();
         try {
-            Instances data = ShapeletFilterMD.loadData(ARFFName);
+        	TimeSeriesMD[] data = ShapeletFilterMD.loadData(sourceName);
 
             //shapeletek száma
             int k = Integer.MAX_VALUE;

@@ -12,7 +12,7 @@ public class LogBasedShapeletTrainerMDFlights {
 	//Main fv.: a log alapján megtalálja a shapeleteket
 	//Innen hívódik ennek a folyamatnak minden része
 	public static void main(String[] args) throws Exception {
-		/*FlightDataProcessor.main(args);
+/*		FlightDataProcessor.main(args);
 
 
 		// propertyk beolvasása
@@ -25,9 +25,9 @@ public class LogBasedShapeletTrainerMDFlights {
 		CSVtoARFFMD.TRAINING_DATA = prop.getProperty("logFileName");
 		CSVtoARFFMD.OUTPUT_DATA = prop.getProperty("trainingDataFileNameArff");
 		CSVtoARFFMD.main(args);
-*/
+
 		
-		
+*/		
 		// learn shapelets
 		LearnShapeletsMD.main(args);	
 	}

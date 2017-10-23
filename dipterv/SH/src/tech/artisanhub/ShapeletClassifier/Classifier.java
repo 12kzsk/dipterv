@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
 import tech.artisanhub.ShapeletTrainerMD.ShapeletFilterMD;
+import tech.artisanhub.ShapeletTrainerMD.TimeSeriesMD;
 import weka.core.Instance;
 
 public class Classifier {
@@ -20,7 +21,7 @@ public class Classifier {
 	//meghívja a ShapeletFilter2.subsequenceDistance(candidate, timeSeries) fv.t --> input: (shapelet,sor), output-->double
 	//ennek az eredményét összehasonlítja a shapelethez tartozó splitThresholddal(küszöb)
 	//params: 1 idõsor, shapelet, shapelethez tartozó osztály, shapelethez tartozó threshold, idõsorok elemeinek dimenziója
-	public String classifyLine(Instance ts, DoubleVectorMD[] sh, String shClass, double th, int dim) throws FileNotFoundException, IOException{
+	public String classifyLine(DoubleVectorMD[] ts, DoubleVectorMD[] sh, String shClass, double th, int dim) throws FileNotFoundException, IOException{
  
 		double dist = ShapeletFilterMD.subsequenceDistance(sh, ts, dim);
 		

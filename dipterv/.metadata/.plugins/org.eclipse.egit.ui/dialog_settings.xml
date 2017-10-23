@@ -24,11 +24,7 @@
 	</section>
 	<section name="GitCommitMessageComponent">
 		<list key="C:\Users\Zsuzsi\git\.git">
-			<item value="false"/>
-			<item value="Zsuzsi &lt;Zsuzsi@ZSU-DESKTOP-O8BQ01J&gt;"/>
-			<item value="10.10"/>
-			<item value="Zsuzsi &lt;Zsuzsi@ZSU-DESKTOP-O8BQ01J&gt;"/>
-			<item value="006c2ed94e4c9a1dbd34cef32690912c4f8c6c95"/>
+			<item value="empty"/>
 		</list>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.staging.StagingView">

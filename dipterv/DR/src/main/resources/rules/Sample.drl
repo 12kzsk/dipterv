@@ -3,15 +3,23 @@ package com.sample
 import com.sample.DroolsTest.LogItem;
 import com.sample.TimeSerieClassifier;
 
-rule "critical"
+rule "criticalHeartBeat"
     when
         LogItem(item : getLogItem())
-        eval(TimeSerieClassifier.isCritical(item))
+        eval(TimeSerieClassifier.isCriticalHeart(item))
     then
-        System.out.println( "kritikus" );
-        System.out.println("A " + item.getElement(1) + ". hónapot követõ hónap lesz kritikus.");
+        System.out.println(item.getElement(0) + "," + item.getElement(1) + ",1.0," + TimeSerieClassifier.lastFoundShapelet);
 end
 
+/*rule "criticalFlight"
+    when
+        LogItem(item : getLogItem())
+        eval(TimeSerieClassifier.isCriticalFlight(item))
+    then
+        System.out.println( "kritikus" );
+        System.out.println("A " + item.getElement(1) + ". hónapot követõ hónap lesz kritikus a reptéri forgalom.");
+end
+*/
 /*
 rule "normal"
     when

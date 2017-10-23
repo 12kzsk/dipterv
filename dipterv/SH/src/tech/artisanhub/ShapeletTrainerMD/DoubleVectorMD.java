@@ -45,3 +45,6 @@ public class DoubleVectorMD {
 		this.doubleVector[i] = element;
 	}
 }
+
+
+

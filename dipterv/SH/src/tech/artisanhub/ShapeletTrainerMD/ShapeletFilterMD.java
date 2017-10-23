@@ -12,15 +12,14 @@ package tech.artisanhub.ShapeletTrainerMD;
 
 import weka.core.*;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
 
-
-
 public class ShapeletFilterMD {
-	
+
 	private int minShapeletLength;
 	private int maxShapeletLength;
 	private int numShapelets;
@@ -96,72 +95,24 @@ public class ShapeletFilterMD {
 
 	/**
 	 *
-	 * @param inputFormat
-	 *            - the format of the input data
-	 * @return a new Instances object in the desired output format
-	 * @throws Exception
-	 *             - if all required attributes of the filter are not
-	 *             initialised correctly
-	 */
-	protected Instances determineOutputFormat(Instances inputFormat) throws Exception {
-
-		if (this.numShapelets < 1) {
-			throw new Exception(
-					"ShapeletFilter not initialised correctly - please specify a value of k that is greater than 1");
-		}
-
-		// Set up instances size and format.
-		int length = this.numShapelets;
-		// FastVector<Attribute> atts = new FastVector();
-		FastVector atts = new FastVector();
-		String name;
-		for (int i = 0; i < length; i++) {
-			name = "Shapelet_" + i;
-			atts.addElement(new Attribute(name));
-		}
-
-		if (inputFormat.classIndex() >= 0) { // Classification set, set class
-			// Get the class values as a fast vector
-			Attribute target = inputFormat.attribute(inputFormat.classIndex());
-
-			FastVector vals = new FastVector(target.numValues());
-			for (int i = 0; i < target.numValues(); i++) {
-				vals.addElement(target.value(i));
-			}
-			atts.addElement(new Attribute(inputFormat.attribute(inputFormat.classIndex()).name(), vals));
-		}
-		Instances result = new Instances("Shapelets" + inputFormat.relationName(), atts, inputFormat.numInstances());
-		if (inputFormat.classIndex() >= 0) {
-			result.setClassIndex(result.numAttributes() - 1);
-		}
-		return result;
-	}
-
-	/**
-	 *
 	 * @param data
-	 *            - the input data to be transformed (and to find the shapelets
-	 *            if this is the first run)
-	 * @return the transformed Instances in terms of the distance from each
-	 *         shapelet
+	 *            - the input data to be transformed (and to find the shapelets if
+	 *            this is the first run)
+	 * @return the transformed Instances in terms of the distance from each shapelet
 	 * @throws Exception
-	 *             - if the number of shapelets or the length parameters
-	 *             specified are incorrect
+	 *             - if the number of shapelets or the length parameters specified
+	 *             are incorrect
 	 */
-	public ArrayList<ShapeletMD> process(Instances data, int dim) throws Exception {
+	public ArrayList<ShapeletMD> process(TimeSeriesMD[] data, int dim) throws Exception {
 		if (this.numShapelets < 1) {
 			throw new Exception(
 					"Number of shapelets initialised incorrectly - please select value of k (Usage: setNumberOfShapelets");
 		}
 
-		int maxPossibleLength;
-		if (data.classIndex() < 0)
-			maxPossibleLength = data.instance(0).numAttributes();
-		else
-			maxPossibleLength = data.instance(0).numAttributes() - 1;
-
 		if (this.minShapeletLength < 1 || this.maxShapeletLength < 1 || this.maxShapeletLength < this.minShapeletLength
-				|| this.maxShapeletLength > maxPossibleLength) {
+		//		|| this.maxShapeletLength > maxPossibleLength)
+				)
+		{
 			throw new Exception("Shapelet length parameters initialised incorrectly");
 		}
 
@@ -217,7 +168,7 @@ public class ShapeletFilterMD {
 	 * @return an ArrayList of Shapelet objects in order of their fitness (by
 	 *         infoGain, seperationGap then shortest length)
 	 */
-	private ArrayList<ShapeletMD> findBestKShapeletsCache(int numShapelets, Instances data, int minShapeletLength,
+	private ArrayList<ShapeletMD> findBestKShapeletsCache(int numShapelets, TimeSeriesMD[] data, int minShapeletLength,
 			int maxShapeletLength, int dim) throws Exception {
 
 		long startTime = System.nanoTime();
@@ -231,18 +182,17 @@ public class ShapeletFilterMD {
 																		// shapelets
 		// overall
 		ArrayList<ShapeletMD> seriesShapelets = new ArrayList<ShapeletMD>(); // temp
-																			// store
-																			// of
-																			// all
-																			// shapelets
+																				// store
+																				// of
+																				// all
+																				// shapelets
 		// for each time series
 
 		/*
-		 * new version to allow caching: - for all time series, calculate the
-		 * gain of all candidates of all possible lengths - insert into a
-		 * strucutre in order of fitness - arraylist with comparable
-		 * implementation of shapelets - once all candidates for a series are
-		 * established, integrate into store of k best
+		 * new version to allow caching: - for all time series, calculate the gain of
+		 * all candidates of all possible lengths - insert into a strucutre in order of
+		 * fitness - arraylist with comparable implementation of shapelets - once all
+		 * candidates for a series are established, integrate into store of k best
 		 */
 
 		TreeMap<Double, Integer> classDistributions = getClassDistributions(data); // used
@@ -253,21 +203,20 @@ public class ShapeletFilterMD {
 
 		// for all time series
 		System.out.println("Processing data: ");
-		int numInstances = data.numInstances();
+		int numInstances = data.length;
 		for (int i = 0; i < numInstances; i++) {
 
-			//if (i == 0 || i % (numInstances / 4) == 0) {
-				System.out.println("Currently processing instance " + (i + 1) + " of " + numInstances);
-			//}
+			// if (i == 0 || i % (numInstances / 4) == 0) {
+			System.out.println("Currently processing instance " + (i + 1) + " of " + numInstances);
+			// }
 
-				
 			// TODO: átalakítás
-			DoubleVectorMD[] wholeCandidate = doubleArrayToDoubleVectorArray(data.instance(i).toDoubleArray());
+			DoubleVectorMD[] wholeCandidate = data[i].getDoubleVector();
 
 			seriesShapelets = new ArrayList<ShapeletMD>();
 
-			//TODO: ITT KELL INICIALIZÁLNI A MAXINFOGAINT és utána..next TODO
-			
+			// TODO: ITT KELL INICIALIZÁLNI A MAXINFOGAINT és utána..next TODO
+
 			for (int length = minShapeletLength; length <= maxShapeletLength; length++) {
 
 				// for all possible starting positions of that length
@@ -292,10 +241,12 @@ public class ShapeletFilterMD {
 					// znorm candidate here so it's only done once, rather than
 					// in each distance calculation
 					rawContent[length] = new DoubleVectorMD();
-					rawContent[length].setElement(0, data.instance(i).classValue());
+					rawContent[length].setElement(0, data[i].getClassValue());
 					candidate = zNorm(candidate, false);
-					//TODO itt kell megnézni, hogy nagyobb-e az eddigi maxinfogainnél a shapelet infogainje és belerakni ha igen (a maxba)
-					ShapeletMD candidateShapelet = checkCandidate(candidate, data, i, start, classDistributions, rawContent, dim);
+					// TODO itt kell megnézni, hogy nagyobb-e az eddigi maxinfogainnél a shapelet
+					// infogainje és belerakni ha igen (a maxba)
+					ShapeletMD candidateShapelet = checkCandidate(candidate, data, i, start, classDistributions,
+							rawContent, dim);
 
 					seriesShapelets.add(candidateShapelet);
 				}
@@ -339,8 +290,7 @@ public class ShapeletFilterMD {
 				out.append(kShapelets.get(i).informationGain + "," + kShapelets.get(i).seriesId + ","
 						+ kShapelets.get(i).startPos + "\n");
 				/*
-				 * Uncomment this code block to write information gain to the
-				 * file
+				 * Uncomment this code block to write information gain to the file
 				 */
 				// double[] shapeletContent = kShapelets.get(i).content;
 				//
@@ -349,8 +299,7 @@ public class ShapeletFilterMD {
 				// }
 
 				/*
-				 * Uncomment this code block to write raw content of the
-				 * shapelet to the file
+				 * Uncomment this code block to write raw content of the shapelet to the file
 				 */
 				DoubleVectorMD[] shapeletRawContent = kShapelets.get(i).rawContent;
 
@@ -374,8 +323,7 @@ public class ShapeletFilterMD {
 	/**
 	 *
 	 * @param shapelets
-	 *            the input Shapelets to remove self similar Shapelet objects
-	 *            from
+	 *            the input Shapelets to remove self similar Shapelet objects from
 	 * @return a copy of the input ArrayList with self-similar shapelets removed
 	 */
 	private static ArrayList<ShapeletMD> removeSelfSimilar(ArrayList<ShapeletMD> shapelets) {
@@ -414,16 +362,16 @@ public class ShapeletFilterMD {
 	/**
 	 *
 	 * @param k
-	 *            the maximum number of shapelets to be returned after combining
-	 *            the two lists
+	 *            the maximum number of shapelets to be returned after combining the
+	 *            two lists
 	 * @param kBestSoFar
 	 *            the (up to) k best shapelets that have been observed so far,
 	 *            passed in to combine with shapelets from a new series
 	 * @param timeSeriesShapelets
 	 *            the shapelets taken from a new series that are to be merged in
 	 *            descending order of fitness with the kBestSoFar
-	 * @return an ordered ArrayList of the best k (or less) Shapelet objects
-	 *         from the union of the input ArrayLists
+	 * @return an ordered ArrayList of the best k (or less) Shapelet objects from
+	 *         the union of the input ArrayLists
 	 */
 
 	// NOTE: could be more efficient here
@@ -449,16 +397,15 @@ public class ShapeletFilterMD {
 	/**
 	 *
 	 * @param data
-	 *            the input data set that the class distributions are to be
-	 *            derived from
-	 * @return a TreeMap<Double, Integer> in the form of <Class Value,
-	 *         Frequency>
+	 *            the input data set that the class distributions are to be derived
+	 *            from
+	 * @return a TreeMap<Double, Integer> in the form of <Class Value, Frequency>
 	 */
-	public static TreeMap<Double, Integer> getClassDistributions(Instances data) {
+	public static TreeMap<Double, Integer> getClassDistributions(TimeSeriesMD[] data) {
 		TreeMap<Double, Integer> classDistribution = new TreeMap<Double, Integer>();
 		double classValue;
-		for (int i = 0; i < data.numInstances(); i++) {
-			classValue = data.instance(i).classValue();
+		for (int i = 0; i < data.length; i++) {
+			classValue = data[i].getClassValue();
 			boolean classExists = false;
 			for (Double d : classDistribution.keySet()) {
 				if (d == classValue) {
@@ -484,12 +431,12 @@ public class ShapeletFilterMD {
 	 *            the entire data set to compare the candidate to
 	 * @param data
 	 *            the entire data set to compare the candidate to
-	 * @return a TreeMap<Double, Integer> in the form of <Class Value,
-	 *         Frequency>
+	 * @return a TreeMap<Double, Integer> in the form of <Class Value, Frequency>
 	 */
-	
-	//NEM egy candidatenél kell nézni a maxInfoGaint, hanem a candidateek között --> át kell adni paraméterként az eddigi maxot
-	private static ShapeletMD checkCandidate(DoubleVectorMD[] candidate, Instances data, int seriesId, int startPos,
+
+	// NEM egy candidatenél kell nézni a maxInfoGaint, hanem a candidateek között
+	// --> át kell adni paraméterként az eddigi maxot
+	private static ShapeletMD checkCandidate(DoubleVectorMD[] candidate, TimeSeriesMD[] data, int seriesId, int startPos,
 			TreeMap classDistribution, DoubleVectorMD[] rawContent, int dim) {
 		// create orderline by looping through data set and calculating the
 		// subsequence
@@ -499,13 +446,13 @@ public class ShapeletFilterMD {
 		double maxInfoGain = -1;
 		double maxDist = -1;
 		boolean endFor = false;
-		boolean pruning = false; //SET PRUNING
+		boolean pruning = false; // SET PRUNING
 
-		for (int i = 0; i < data.numInstances(); i++) {
+		for (int i = 0; i < data.length; i++) {
 			if (!endFor) {
-				double distance = subsequenceDistance(candidate, data.instance(i), dim);
-				
-				double classVal = data.instance(i).classValue();
+				double distance = subsequenceDistance(candidate, data[i].getDoubleVector(), dim);
+
+				double classVal = data[i].getClassValue();
 
 				if (maxDist < distance)
 					maxDist = distance;
@@ -521,9 +468,9 @@ public class ShapeletFilterMD {
 					orderlineCopy1.addAll(orderline);
 					// 2.amit még nem számoltunk ki (=a ciklus maradékában)
 
-					for (int j = i; j < data.numInstances(); j++) {
+					for (int j = i; j < data.length; j++) {
 						// ahol a classVal 0.0 ott 0 távolságot adunk meg
-						double classValCopy = data.instance(j).classValue();
+						double classValCopy = data[i].getClassValue();
 						double distanceCopy = 0.0;
 						if (classValCopy == 0.0) {
 							distanceCopy = 0;
@@ -551,9 +498,9 @@ public class ShapeletFilterMD {
 					// 0.0nál adjuk meg a legnagyobbat és 1.0nál 0-t
 					ArrayList<OrderLineObjMD> orderlineCopy2 = new ArrayList<OrderLineObjMD>();
 					orderlineCopy2.addAll(orderline);
-					for (int j = i; j < data.numInstances(); j++) {
+					for (int j = i; j < data.length; j++) {
 						// ahol a classVal 0.0 ott 0 távolságot adunk meg
-						double classValCopy = data.instance(j).classValue();
+						double classValCopy = data[i].getClassValue();
 						double distanceCopy = 0.0;
 						if (classValCopy == 0.0) {
 							distanceCopy = 0;
@@ -592,7 +539,8 @@ public class ShapeletFilterMD {
 					// oldjuk meg mint a másiknál? vmi ilyesmi
 					if (iG12max < maxInfoGain)
 						endFor = true;
-					//NEM endFor = true HANEM return shapeletCopy1 vagy 2 az attól függ h melyik a nagyobb infogain; TODO
+					// NEM endFor = true HANEM return shapeletCopy1 vagy 2 az attól függ h melyik a
+					// nagyobb infogain; TODO
 
 					// ellenõrzés: bool változóval szabályozni hogy melyik
 					// módszert
@@ -616,8 +564,9 @@ public class ShapeletFilterMD {
 		shapelet.rawContent = rawContent;
 		shapelet.calcInfoGainAndThreshold(orderline, classDistribution);
 
-		if (shapelet.informationGain > maxInfoGain) 
-			//TODO ezt nem is itt kell nézni hanem kívül (emiatt át kell adni paramként a maxinfogaint)
+		if (shapelet.informationGain > maxInfoGain)
+			// TODO ezt nem is itt kell nézni hanem kívül (emiatt át kell adni paramként a
+			// maxinfogaint)
 			maxInfoGain = shapelet.informationGain;
 		// note: early abandon entropy pruning would appear here, but has been
 		// ommitted
@@ -625,7 +574,7 @@ public class ShapeletFilterMD {
 		// be added in
 		// this method in the future for speed up, but distance early abandon is
 		// more important
-		
+
 		return shapelet;
 	}
 
@@ -657,9 +606,9 @@ public class ShapeletFilterMD {
 		double bestSum = Double.MAX_VALUE;
 		double sum = 0;
 		DoubleVectorMD[] subseq;
-		
+
 		// for all possible subsequences of two //TODO VISSZARAKNI A -1et!!!!!!!
-//		for (int i = 0; i <= timeSeries.length - candidate.length - 1; i++) {
+		// for (int i = 0; i <= timeSeries.length - candidate.length - 1; i++) {
 		for (int i = 0; i <= timeSeries.length - candidate.length; i++) {
 
 			sum = 0;
@@ -669,9 +618,9 @@ public class ShapeletFilterMD {
 			for (int j = i; j < i + candidate.length; j++) {
 				subseq[j - i] = timeSeries[j];
 			}
-			
+
 			subseq = zNorm(subseq, false); // Z-NORM HERE
-			
+
 			for (int j = 0; j < candidate.length; j++) {
 				for (int k = 0; k < dim; k++) {
 					if (sum < bestSum) { // this line: early abandon done
@@ -695,7 +644,7 @@ public class ShapeletFilterMD {
 	 * @return
 	 */
 	public static DoubleVectorMD[] zNorm(DoubleVectorMD[] input, boolean classValOn) { // TODO:
-																					// normalizálás
+																						// normalizálás
 		double mean;
 		double stdv;
 
@@ -708,7 +657,7 @@ public class ShapeletFilterMD {
 			output[k] = new DoubleVectorMD();
 		}
 
-		for (int j = 0; j < LearnShapeletsMD.vectorSize; j++) { //TODO
+		for (int j = 0; j < LearnShapeletsMD.vectorSize; j++) { // TODO
 			double seriesTotal = 0;
 
 			for (int i = 0; i < input.length - classValPenalty; i++) {
@@ -741,14 +690,32 @@ public class ShapeletFilterMD {
 	 * @param fileName
 	 * @return
 	 */
-	public static Instances loadData(String fileName) {
-		Instances data = null;
+	public static TimeSeriesMD[] loadData(String fileName) {
+		TimeSeriesMD[] data = null;
 		try {
-			FileReader r;
-			r = new FileReader(fileName);
-			data = new Instances(r);
-
-			data.setClassIndex(data.numAttributes() - 1);
+			BufferedReader brX = new BufferedReader(new FileReader(fileName));
+			String line;
+			int count = 0;
+			while ((line = brX.readLine()) != null) {
+				count++;
+			}
+			data = new TimeSeriesMD[count];
+			brX = new BufferedReader(new FileReader(fileName));
+			count = 0;
+			while ((line = brX.readLine()) != null) {
+				String[] b = line.split(",");
+				TimeSeriesMD ts = new TimeSeriesMD((b.length - 1)/LearnShapeletsMD.vectorSize);
+				for (int i = 0;i<ts.getDoubleVector().length;i++) {
+					DoubleVectorMD dv = new DoubleVectorMD();
+					for (int j=0;j<LearnShapeletsMD.vectorSize;j++) {
+						dv.setElement(j, Double.parseDouble(b[i*LearnShapeletsMD.vectorSize + j]));
+					}
+					ts.setElement(i, dv);
+				}
+				ts.setClassValue(Double.parseDouble(b[b.length - 1]));
+				data[count] = ts;
+				count++;
+			}
 		} catch (Exception e) {
 			System.out.println(" Error =" + e + " in method loadData");
 			e.printStackTrace();
@@ -785,23 +752,21 @@ public class ShapeletFilterMD {
 	// sf.process(data);
 	// }
 	/*
-	 * public static ShapeletFilter2 createFilterFromFile(String fileName)
-	 * throws Exception {
+	 * public static ShapeletFilter2 createFilterFromFile(String fileName) throws
+	 * Exception {
 	 * 
 	 * File input = new File(fileName); Scanner scan = new Scanner(input);
 	 * scan.useDelimiter("\n");
 	 * 
-	 * ShapeletFilter2 sf = new ShapeletFilter2(); ArrayList<Shapelet2>
-	 * shapelets = new ArrayList<Shapelet2>();
+	 * ShapeletFilter2 sf = new ShapeletFilter2(); ArrayList<Shapelet2> shapelets =
+	 * new ArrayList<Shapelet2>();
 	 * 
-	 * String shapeletContentString; ArrayList<DoubleVector> content;
-	 * DoubleVector[] contentArray; Scanner lineScan;
+	 * String shapeletContentString; ArrayList<DoubleVector> content; DoubleVector[]
+	 * contentArray; Scanner lineScan;
 	 * 
-	 * while (scan.hasNext()) { scan.next(); shapeletContentString =
-	 * scan.next();
+	 * while (scan.hasNext()) { scan.next(); shapeletContentString = scan.next();
 	 * 
-	 * lineScan = new Scanner(shapeletContentString);
-	 * lineScan.useDelimiter(",");
+	 * lineScan = new Scanner(shapeletContentString); lineScan.useDelimiter(",");
 	 * 
 	 * content = new ArrayList<DoubleVector>(); while (lineScan.hasNext()) {
 	 * content.add(Double.parseDouble(lineScan.next().trim())); }

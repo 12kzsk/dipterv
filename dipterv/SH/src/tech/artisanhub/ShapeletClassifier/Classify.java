@@ -46,6 +46,7 @@ public class Classify {
 		// csv to arff
 //		CSVtoARFF.TRAINING_DATA = prop.getProperty("inputDataFileNameCsv");
 		CSVtoARFF.OUTPUT_DATA = prop.getProperty("inputDataFileNameArff");
+//		CSVtoARFF.OUTPUT_DATA = prop.getProperty("trainingDataFileNameArff");
 //		CSVtoARFF.main(args);
 		
 		LearnShapeletsMD.vectorSize = Integer.parseInt(prop.getProperty("dimension"));

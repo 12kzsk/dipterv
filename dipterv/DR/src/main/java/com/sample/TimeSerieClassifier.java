@@ -2,6 +2,7 @@ package com.sample;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,10 +13,69 @@ import weka.core.SparseInstance;
 
 public class TimeSerieClassifier {
 
-	public static DoubleVectorMD[] vectors;
+	public static DoubleVectorMD[] vectors; //az utolsó shapelet hosszúságú idõsor
 	public static int vecSize = 0;
+	public static int lastFoundShapelet = -1;
+	//hány adattal ezelõtt találtunk shapeletet (az utolsó karakterre vonatkozik)
+	
+	public static boolean isCriticalHeart(DoubleVectorMD vector) throws FileNotFoundException, IOException {
+		boolean isCrit = false;
+		
+		int shLength = DroolsTest.shapelet.length;
+		
+		// vector tömb rendezése
+		if (vectors == null)
+			vectors = new DoubleVectorMD[shLength];
+		if (vecSize < shLength) {
+			vectors[vecSize] = vector;
+			vecSize++;
+		} else {
+			for (int i = 0; i < shLength-1; i++) {
+				vectors[i] = vectors[i + 1];
+			}
+			vectors[shLength-1] = vector;
 
-	public static boolean isCritical(DoubleVectorMD vector) throws FileNotFoundException, IOException {
+			// kritikus-e?
+			Classifier cl = new Classifier();
+
+			//DroolsTest.cls = a shapelet milyen osztályú sorból lett kiszedve
+			String cls = cl.classifyLine(vectors, DroolsTest.shapelet, DroolsTest.cls, DroolsTest.th, DroolsTest.dimension);
+
+			if (DroolsTest.cls.equals("1.0")){
+				if(cls.equals("1.0"))
+					isCrit = true;
+				else
+					isCrit = false;
+			}
+			else if(DroolsTest.cls.equals("0.0")) {
+				if(cls.equals("0.0"))
+					lastFoundShapelet = 0;
+				else if(lastFoundShapelet!=-1)
+					lastFoundShapelet++;
+				
+				if (lastFoundShapelet > DroolsTest.drTsLength){
+					isCrit = true;
+				}
+			}
+			else System.out.println("Egyik osztályú sem volt, valami baj van.");
+		}
+
+		try
+		{
+		    String filename= "result.csv";
+		    FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+		    fw.write(vector.getElement(0) + "," + vector.getElement(1) + ",1.0," + lastFoundShapelet + "\n");//appends the string to the file
+		    fw.close();
+		}
+		catch(IOException ioe)
+		{
+		    System.err.println("IOException: " + ioe.getMessage());
+		}
+		
+		return isCrit;
+	}
+/*	
+	public static boolean isCriticalFlight(DoubleVectorMD vector) throws FileNotFoundException, IOException {
 		boolean isCrit = false;
 		
 		int tsLength = DroolsTest.shapelet.length;
@@ -54,5 +114,5 @@ public class TimeSerieClassifier {
 		}
 
 		return isCrit;
-	}
+	}*/
 }
