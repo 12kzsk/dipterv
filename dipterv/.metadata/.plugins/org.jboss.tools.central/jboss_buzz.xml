@@ -2,13 +2,45 @@
 <?xml-stylesheet type="text/xsl" media="screen" href="/~d/styles/atom10full.xsl"?><?xml-stylesheet type="text/css" media="screen" href="http://feeds.feedburner.com/~d/styles/itemcontent.css"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0">
 <title>JBoss Central</title>
 <generator uri="http://tt-rss.org/">Tiny Tiny RSS/1.9</generator>
-<updated>2017-08-21T14:14:44+00:00</updated>
+<updated>2017-08-31T10:48:12+00:00</updated>
 <id>http://tiny-man.rhcloud.com/public.php?op=rss&amp;id=1&amp;key=b0143615132bd9efc4e83ba42a5574f6ab939b28</id>
 
 
 <link href="http://tiny-man.rhcloud.com" rel="alternate" />
 
 <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/atom+xml" href="http://feeds.feedburner.com/jbossbuzz" /><feedburner:info uri="jbossbuzz" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /><entry>
+	<id>https://developer.jboss.org/blogs/weekly-editorial/2017/10/26/the-week-in-jboss-2017-10-26</id>
+	<link href="http://feedproxy.google.com/~r/jbossbuzz/~3/xGZsZabP0gQ/the-week-in-jboss-2017-10-26" rel="alternate" type="text/html" />
+	<title>The Week in JBoss - WildFly 11 Final is here!</title>
+	<summary type="html"><![CDATA[<!-- [DocumentBodyStart:72947091-3fc0-4266-bd2f-05e054de1995] --><div class="jive-rendered-content"><h2>The big news this week is...</h2><p style="min-height: 8pt; padding: 0px;">&#160;</p><p style="text-align: center;"><a href="http://wildfly.org/downloads/" rel="nofollow"><img alt="wildflycarousel_11_blackbkg.png" class="image-2 jive-image" height="500" src="https://developer.jboss.org/servlet/JiveServlet/downloadImage/38-6136-141242/wildflycarousel_11_blackbkg.png" style="width: 620px; height: 265px;" width="1170"/></a></p><p style="text-align: left;"><a class="jive-link-external-small" href="http://planet.jboss.org/post/wildfly_11_final_is_now_available" rel="nofollow">WildFly 11 Final was released this week</a>. As you would expect for a major WildFly release, it comes with many significant improvements. Including:</p><p style="min-height: 8pt; padding: 0px; text-align: left;">&#160;</p><ul><li><strong>Elytron - New Security Infrastructure</strong>. The biggest change in WildFly 11 is unification on a new common security framework across the full application server.</li><li><strong>Simplified EJB / Naming Proxies.</strong> JNDI and EJB invocation have both been simplified and enhanced in WildFly 11.</li><li><strong>Request oriented EJB/JNDI over HTTP.</strong></li><li><strong>WildFly OpenSSL &amp; HTTP/2.</strong> WildFly 11 now provides a JSSE provider that can offload TLS handling from the JVM&#8217;s internal implementation to an OpenSSL library on your system, typically improving TLS performance.</li><li><strong>New Load-Balancer Configs.</strong> In order to simplify the setup of WildFly as an HTTP load-balancer, there is an additional standalone-load-balancer.xml configuration in the distribution, which is an instance slimmed to just running the load balancing services.</li><li><strong>Graceful Shutdown/Startup Improvements.</strong> Distributed transactions are now handled by the graceful shutdown mechanism.</li><li><strong>Web Console Improvements.</strong> A number of Web Console improvements are included in WildFly 11, including the ability to see recent configuration changes, to manage active JMS transactions, manage active batch jobs, manage Undertow filters, and test data-sources during creation.</li><li><strong>Management and Configuration Improvements.</strong> WildFly 11 now supports remote managed exploded deployments, which allows remote management clients the ability to update content within the deployment, such as html and jsp files without requiring a full redeployment.</li></ul><p style="min-height: 8pt; padding: 0px;">&#160;</p><p>Read more <a class="jive-link-external-small" href="http://planet.jboss.org/post/wildfly_11_final_is_now_available" rel="nofollow">here</a>.</p><p style="min-height: 8pt; padding: 0px;">&#160;</p><h2>Microservices &amp; Microprofile</h2><p style="min-height: 8pt; padding: 0px;">&#160;</p><table border="0px" class="jiveBorder" jive-data-cell="{&quot;color&quot;:&quot;#3D3D3D&quot;,&quot;textAlign&quot;:&quot;left&quot;,&quot;padding&quot;:&quot;6&quot;,&quot;backgroundColor&quot;:&quot;transparent&quot;,&quot;fontFamily&quot;:&quot;Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif&quot;,&quot;verticalAlign&quot;:&quot;baseline&quot;}" jive-data-header="{&quot;color&quot;:&quot;#505050&quot;,&quot;backgroundColor&quot;:&quot;#F2F2F2&quot;,&quot;textAlign&quot;:&quot;left&quot;,&quot;padding&quot;:&quot;6&quot;}" style="border: 0px solid #c6c6c6; width: 100%;"><tbody><tr><td style="border:0pxpx solid black;border: 0px solid #c6c6c6;padding: 6px;"><p>It's been a busy week for Microservices content. <strong>Christian Posta</strong> continues his series on <a class="jive-link-external-small" href="https://developers.redhat.com/blog/2017/10/23/low-risk-monolith-microservice-evolution-part-ii/" rel="nofollow">Low-risk Monolith to Microservice Evolution</a>, which looks to be a great writeup for those planning a migration to a Microservices architecture. <strong>Ken Finnigan</strong> provides a step-by-step guide to setting up data streaming with <a class="jive-link-external-small" href="https://developers.redhat.com/blog/2017/10/24/data-streaming-wildfly-swarm-apache-kafka/" rel="nofollow">WildFly Swarm and Apache Kafka</a>. <strong>Cesar Saavedra</strong> continues his guide on setting up a <a class="jive-link-external-small" href="https://developers.redhat.com/blog/2017/10/20/microprofile-based-microservice-openshift-container-platform-part-3/" rel="nofollow">MicroProfile-based microservice on OpenShift Container Platform</a>. Finally, <strong>Heiko Rupp</strong> explains <a class="jive-link-external-small" href="https://developers.redhat.com/blog/2017/10/25/monitor-eclipse-microprofile-1-2-server-prometheus/" rel="nofollow">how to monitor an Eclipse MicroProfile 1.2 server with Prometheus</a>.</p></td><td style="border:0pxpx solid black;border: 0px solid #c6c6c6;padding: 6px;"><a href="https://developer.jboss.org/servlet/JiveServlet/showImage/38-6136-141241/download.jpeg"><img alt="download.jpeg" class="image-1 jive-image" height="94" src="https://developer.jboss.org/servlet/JiveServlet/downloadImage/38-6136-141241/download.jpeg" style="height: auto;" width="535"/></a></td></tr></tbody></table><h2>Other News</h2><ul><li><strong>Elvadas Nono</strong> provides a tutorial on <a class="jive-link-external-small" href="https://developers.redhat.com/blog/2017/10/25/tutorial-building-consuming-virtual-microdatabase-jboss-data-virtualization/" rel="nofollow">building and consuming virtual Microdatabases with JBoss Data Virtualization</a>.</li><li><strong>Eric Schabell</strong> continues his blog series on 10 Steps to Cloud Happiness. In this post he focuses on <a class="jive-link-external-small" href="http://planet.jboss.org/post/10_steps_to_cloud_happiness_step_4_centralize_business_logic" rel="nofollow">Centralising Business Logic</a>.</li><li><strong>Vlad Mihalcea</strong> <a class="jive-link-external-small" href="http://planet.jboss.org/post/meet_lukas_eder" rel="nofollow">interviews Lukas Eder</a>, a Java Champion, SQL aficionado, and data access framework developer.</li><li><strong>Claus Ibsen</strong> explains how to <a class="jive-link-external-small" href="http://planet.jboss.org/post/working_with_large_messages_using_apache_camel_and_activemq_artemis_improved_in_upcoming_camel_2_21_release" rel="nofollow">work with large messages using Apache Camel and ActiveMQ Artemis</a>.</li></ul><h2></h2><h2>Releases</h2><ul><li><a class="jive-link-external-small" href="http://planet.jboss.org/post/wildfly_11_final_is_now_available" rel="nofollow">WildFly 11 Final</a></li><li><a class="jive-link-external-small" href="http://planet.jboss.org/post/teiid_10_0_0_cr2_released" rel="nofollow">Teiid 10.0.0.CR2</a></li><li><a class="jive-link-external-small" href="http://planet.jboss.org/post/hibernate_validator_6_0_4_final_released" rel="nofollow">Hibernate Validator 6.0.4.Final</a></li><li><a class="jive-link-external-small" href="http://planet.jboss.org/post/smart_testing_0_0_3_released" rel="nofollow">Smart Testing 0.0.3</a></li><li><a class="jive-link-external-small" href="http://planet.jboss.org/post/teiid_9_3_4_released" rel="nofollow">Teiid 9.3.4</a></li><li><a class="jive-link-external-small" href="https://issues.jboss.org/projects/JGRP/versions/12335631" rel="nofollow">JGroups 4.0.8</a></li></ul></div><!-- [DocumentBodyEnd:72947091-3fc0-4266-bd2f-05e054de1995] -->]]></summary>
+	<content type="html">&lt;html&gt;&lt;!-- [DocumentBodyStart:72947091-3fc0-4266-bd2f-05e054de1995] --&gt;&lt;body&gt;&lt;div&gt;&lt;h2&gt;The big news this week is...&lt;/h2&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;a href="http://wildfly.org/downloads/" rel="nofollow" target="_blank"&gt;&lt;img alt="wildflycarousel_11_blackbkg.png" height="500" src="https://developer.jboss.org/servlet/JiveServlet/downloadImage/38-6136-141242/wildflycarousel_11_blackbkg.png" width="1170"&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href="http://planet.jboss.org/post/wildfly_11_final_is_now_available" rel="nofollow" target="_blank"&gt;WildFly 11 Final was released this week&lt;/a&gt;. As you would expect for a major WildFly release, it comes with many significant improvements. Including:&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Elytron - New Security Infrastructure&lt;/strong&gt;. The biggest change in WildFly 11 is unification on a new common security framework across the full application server.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Simplified EJB / Naming Proxies.&lt;/strong&gt; JNDI and EJB invocation have both been simplified and enhanced in WildFly 11.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Request oriented EJB/JNDI over HTTP.&lt;/strong&gt;&lt;/li&gt;&lt;li&gt;&lt;strong&gt;WildFly OpenSSL &amp;amp; HTTP/2.&lt;/strong&gt; WildFly 11 now provides a JSSE provider that can offload TLS handling from the JVM&amp;rsquo;s internal implementation to an OpenSSL library on your system, typically improving TLS performance.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;New Load-Balancer Configs.&lt;/strong&gt; In order to simplify the setup of WildFly as an HTTP load-balancer, there is an additional standalone-load-balancer.xml configuration in the distribution, which is an instance slimmed to just running the load balancing services.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Graceful Shutdown/Startup Improvements.&lt;/strong&gt; Distributed transactions are now handled by the graceful shutdown mechanism.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Web Console Improvements.&lt;/strong&gt; A number of Web Console improvements are included in WildFly 11, including the ability to see recent configuration changes, to manage active JMS transactions, manage active batch jobs, manage Undertow filters, and test data-sources during creation.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Management and Configuration Improvements.&lt;/strong&gt; WildFly 11 now supports remote managed exploded deployments, which allows remote management clients the ability to update content within the deployment, such as html and jsp files without requiring a full redeployment.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;Read more &lt;a href="http://planet.jboss.org/post/wildfly_11_final_is_now_available" rel="nofollow" target="_blank"&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;h2&gt;Microservices &amp;amp; Microprofile&lt;/h2&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;table border="0px" jive-data-cell='{"color":"#3D3D3D","textAlign":"left","padding":"6","backgroundColor":"transparent","fontFamily":"Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif","verticalAlign":"baseline"}' jive-data-header='{"color":"#505050","backgroundColor":"#F2F2F2","textAlign":"left","padding":"6"}'&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;p&gt;It's been a busy week for Microservices content. &lt;strong&gt;Christian Posta&lt;/strong&gt; continues his series on &lt;a href="https://developers.redhat.com/blog/2017/10/23/low-risk-monolith-microservice-evolution-part-ii/" rel="nofollow" target="_blank"&gt;Low-risk Monolith to Microservice Evolution&lt;/a&gt;, which looks to be a great writeup for those planning a migration to a Microservices architecture. &lt;strong&gt;Ken Finnigan&lt;/strong&gt; provides a step-by-step guide to setting up data streaming with &lt;a href="https://developers.redhat.com/blog/2017/10/24/data-streaming-wildfly-swarm-apache-kafka/" rel="nofollow" target="_blank"&gt;WildFly Swarm and Apache Kafka&lt;/a&gt;. &lt;strong&gt;Cesar Saavedra&lt;/strong&gt; continues his guide on setting up a &lt;a href="https://developers.redhat.com/blog/2017/10/20/microprofile-based-microservice-openshift-container-platform-part-3/" rel="nofollow" target="_blank"&gt;MicroProfile-based microservice on OpenShift Container Platform&lt;/a&gt;. Finally, &lt;strong&gt;Heiko Rupp&lt;/strong&gt; explains &lt;a href="https://developers.redhat.com/blog/2017/10/25/monitor-eclipse-microprofile-1-2-server-prometheus/" rel="nofollow" target="_blank"&gt;how to monitor an Eclipse MicroProfile 1.2 server with Prometheus&lt;/a&gt;.&lt;/p&gt;&lt;/td&gt;&lt;td&gt;&lt;a href="https://developer.jboss.org/servlet/JiveServlet/showImage/38-6136-141241/download.jpeg" target="_blank"&gt;&lt;img alt="download.jpeg" height="94" src="https://developer.jboss.org/servlet/JiveServlet/downloadImage/38-6136-141241/download.jpeg" width="535"&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;h2&gt;Other News&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Elvadas Nono&lt;/strong&gt; provides a tutorial on &lt;a href="https://developers.redhat.com/blog/2017/10/25/tutorial-building-consuming-virtual-microdatabase-jboss-data-virtualization/" rel="nofollow" target="_blank"&gt;building and consuming virtual Microdatabases with JBoss Data Virtualization&lt;/a&gt;.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Eric Schabell&lt;/strong&gt; continues his blog series on 10 Steps to Cloud Happiness. In this post he focuses on &lt;a href="http://planet.jboss.org/post/10_steps_to_cloud_happiness_step_4_centralize_business_logic" rel="nofollow" target="_blank"&gt;Centralising Business Logic&lt;/a&gt;.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Vlad Mihalcea&lt;/strong&gt; &lt;a href="http://planet.jboss.org/post/meet_lukas_eder" rel="nofollow" target="_blank"&gt;interviews Lukas Eder&lt;/a&gt;, a Java Champion, SQL aficionado, and data access framework developer.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Claus Ibsen&lt;/strong&gt; explains how to &lt;a href="http://planet.jboss.org/post/working_with_large_messages_using_apache_camel_and_activemq_artemis_improved_in_upcoming_camel_2_21_release" rel="nofollow" target="_blank"&gt;work with large messages using Apache Camel and ActiveMQ Artemis&lt;/a&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;&lt;/h2&gt;&lt;h2&gt;Releases&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="http://planet.jboss.org/post/wildfly_11_final_is_now_available" rel="nofollow" target="_blank"&gt;WildFly 11 Final&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="http://planet.jboss.org/post/teiid_10_0_0_cr2_released" rel="nofollow" target="_blank"&gt;Teiid 10.0.0.CR2&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="http://planet.jboss.org/post/hibernate_validator_6_0_4_final_released" rel="nofollow" target="_blank"&gt;Hibernate Validator 6.0.4.Final&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="http://planet.jboss.org/post/smart_testing_0_0_3_released" rel="nofollow" target="_blank"&gt;Smart Testing 0.0.3&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="http://planet.jboss.org/post/teiid_9_3_4_released" rel="nofollow" target="_blank"&gt;Teiid 9.3.4&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://issues.jboss.org/projects/JGRP/versions/12335631" rel="nofollow" target="_blank"&gt;JGroups 4.0.8&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;!-- [DocumentBodyEnd:72947091-3fc0-4266-bd2f-05e054de1995] --&gt;&lt;/body&gt;&lt;/html&gt;
+&lt;img src="http://feeds.feedburner.com/~r/jbossbuzz/~4/xGZsZabP0gQ" height="1" width="1" alt=""/&gt;</content>
+	<updated>2017-10-26T10:09:32+00:00</updated>
+	<author><name>Paul Robinson</name></author>
+	<source>
+		<link rel="self" href="http://community.jboss.org/blogs/weekly-editorial/feeds/" />
+		<title>Weekly Editorial</title></source>
+
+	<category term="hibernate" />
+
+	<category term="teiid" />
+
+	<category term="jgroups" />
+
+	<category term="wildfly" />
+
+	<category term="microservices" />
+
+	<category term="microprofile" />
+
+	<category term="hibernate validator" />
+
+	<category term="smart testing" />
+
+
+<feedburner:origLink>https://developer.jboss.org/blogs/weekly-editorial/2017/10/26/the-week-in-jboss-2017-10-26</feedburner:origLink></entry>
+
+<entry>
 	<id>https://developer.jboss.org/blogs/weekly-editorial/2017/10/20/this-week-in-jboss-20th-october-2017-microservices-and-more</id>
 	<link href="http://feedproxy.google.com/~r/jbossbuzz/~3/iPVdAKXNedA/this-week-in-jboss-20th-october-2017-microservices-and-more" rel="alternate" type="text/html" />
 	<title>This week in JBoss (20th October 2017): Microservices and more</title>
@@ -906,337 +938,6 @@
 
 
 <feedburner:origLink>https://developer.jboss.org/blogs/weekly-editorial/2017/08/31/this-week-in-jboss-31st-august-2017-the-times-they-are-a-changin</feedburner:origLink></entry>
-
-<entry>
-	<id>https://tools.jboss.org/blog/integration-stack-4.5.0.Final.html</id>
-	<link href="http://feedproxy.google.com/~r/jbossbuzz/~3/2tzRZzqKxVk/integration-stack-4.5.0.Final.html" rel="alternate" type="text/html" />
-	<title>Integration Tooling for Eclipse Oxygen</title>
-	<summary type="html"><![CDATA[
-      <div><div id="preamble">
-      <div class="sectionbody">
-      <div class="paragraph">
-      <p><strong>Try our complete Eclipse Oxygen and Red Hat JBoss Developer Studio 11 compatible integration tooling.</strong></p>
-      </div>
-      <div class="imageblock">
-      <div class="content">
-      <img src="https://tools.jboss.org/blog/images/jbosstools-jbdevstudio-blog-header.png" alt="jbosstools jbdevstudio blog header" />
-      </div>
-      </div>
-      <div class="paragraph">
-      <p><strong>JBoss Tools Integration Stack 4.5.0.Final / Developer Studio Integration Stack 11.0.0.GA</strong></p>
-      </div>
-      <div class="admonitionblock note">
-      <table>
-      <tr>
-      <td class="icon">
-      <i class="fa icon-note" title="Note"></i>
-      </td>
-      <td class="content">
-      All of the Integration Stack components have been verified to work with the same dependencies as JBoss Tools 4.5 and Developer Studio 11.
-      </td>
-      </tr>
-      </table>
-      </div>
-      </div>
-      </div>
-      <div class="sect1">
-      <h2 id="what-s-new-for-this-release"><a class="anchor" href="#what-s-new-for-this-release"></a>What’s new for this release?</h2>
-      <div class="sectionbody">
-      <div class="paragraph">
-      <p>This is the initial release in support of Eclipse Oxygen.  It syncs up with Developer Studio 11.0.0, JBoss Tools 4.5.0 and Eclipse 4.7.0 (Oxygen.0).  It is also a maintenance release for SwitchYard and BRMS tooling.</p>
-      </div>
-      <div class="paragraph">
-      <p>Data Virtualization tooling support is not yet available (scheduled for the autumn).</p>
-      </div>
-      <div class="paragraph">
-      <p>SwitchYard is deprecated in this release.</p>
-      </div>
-      <div class="paragraph">
-      <p><a href="https://tools.jboss.org/features/fusetools.html">Fuse Tooling</a> has moved out of the Integration Stack to be a core part of JBoss Tools and Developer Studio.</p>
-      </div>
-      <div class="sect2">
-      <h3 id="released-tooling-highlights"><a class="anchor" href="#released-tooling-highlights"></a>Released Tooling Highlights</h3>
-      <div class="sect3">
-      <h4 id="jboss-business-process-and-rules-development"><a class="anchor" href="#jboss-business-process-and-rules-development"></a>JBoss Business Process and Rules Development</h4>
-      <div class="sect4">
-      <h5 id="bpmn2-modeler-known-issues"><a class="anchor" href="#bpmn2-modeler-known-issues"></a>BPMN2 Modeler Known Issues</h5>
-      <div class="paragraph">
-      <p>See the <a href="https://access.redhat.com/documentation/en-us/red_hat_jboss_developer_studio_integration_stack/11.0/html/11.0.0_release_notes_and_known_issues/known_issues#bpmn2_1_4_0_final_2">BPMN2 1.4.0.Final Known Issues Section</a> of the Integration Stack 11.0.0.GA release notes.</p>
-      </div>
-      </div>
-      <div class="sect4">
-      <h5 id="drools-jbpm6-known-issues"><a class="anchor" href="#drools-jbpm6-known-issues"></a>Drools/jBPM6 Known Issues</h5>
-      <div class="paragraph">
-      <p>See the <a href="https://access.redhat.com/documentation/en-us/red_hat_jboss_developer_studio_integration_stack/11.0/html/11.0.0_release_notes_and_known_issues/known_issues#drools_7_0_1_final_2">Drools 7.0.1.Final Known Issues Section</a> of the Integration Stack 11.0.0.GA release notes.</p>
-      </div>
-      </div>
-      <div class="sect4">
-      <h5 id="switchyard-highlights"><a class="anchor" href="#switchyard-highlights"></a>SwitchYard Highlights</h5>
-      <div class="paragraph">
-      <p>See the <a href="https://access.redhat.com/documentation/en-us/red_hat_jboss_developer_studio_integration_stack/11.0/html/11.0.0_release_notes_and_known_issues/known_issues#switchyard_2_4_0_final_2">SwitchYard 2.4.0.Final Resolved Issues Section</a> of the Integration Stack 11.0.0.GA release notes.</p>
-      </div>
-      </div>
-      </div>
-      <div class="sect3">
-      <h4 id="data-virtualization-highlights"><a class="anchor" href="#data-virtualization-highlights"></a>Data Virtualization Highlights</h4>
-      <div class="sect4">
-      <h5 id="teiid-designer"><a class="anchor" href="#teiid-designer"></a>Teiid Designer</h5>
-      <div class="paragraph">
-      <p>Not yet available for Oxygen.</p>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      <div class="sect1">
-      <h2 id="what-s-an-integration-stack"><a class="anchor" href="#what-s-an-integration-stack"></a>What’s an Integration Stack?</h2>
-      <div class="sectionbody">
-      <div class="paragraph">
-      <p>Red Hat JBoss Developer Studio Integration Stack is a set of Eclipse-based development tools. It further enhances the IDE functionality provided by JBoss Developer Studio, with plug-ins specifically for use when developing for other Red Hat JBoss products.  It’s where DataVirt Tooling, SOA tooling and BRMS tooling are aggregated.  The following frameworks are supported:</p>
-      </div>
-      <div class="sect2">
-      <h3 id="jboss-business-process-and-rules-development-2"><a class="anchor" href="#jboss-business-process-and-rules-development-2"></a>JBoss Business Process and Rules Development</h3>
-      <div class="paragraph">
-      <p>JBoss Business Process and Rules Development plug-ins provide design, debug and testing tooling for developing business processes for Red Hat JBoss BRMS and Red Hat JBoss BPM Suite.</p>
-      </div>
-      <div class="ulist">
-      <ul>
-      <li>
-      <p><a href="https://tools.jboss.org/features/bpel.html">BPEL Designer</a> - Orchestrating your business processes.</p>
-      </li>
-      <li>
-      <p><a href="https://tools.jboss.org/features/bpmn2.html">BPMN2 Modeler</a> - A graphical modeling tool which allows creation and editing of Business Process Modeling Notation diagrams using graphiti.</p>
-      </li>
-      <li>
-      <p><a href="https://tools.jboss.org/features/drools.html">Drools</a> - A Business Logic integration Platform which provides a unified and integrated platform for Rules, Workflow and Event Processing including KIE.</p>
-      </li>
-      <li>
-      <p><a href="https://tools.jboss.org/features/jbpm.html">jBPM6</a> - A flexible Business Process Management (BPM) suite.</p>
-      </li>
-      </ul>
-      </div>
-      </div>
-      <div class="sect2">
-      <h3 id="jboss-data-virtualization-development"><a class="anchor" href="#jboss-data-virtualization-development"></a>JBoss Data Virtualization Development</h3>
-      <div class="paragraph">
-      <p>JBoss Data Virtualization Development plug-ins provide a graphical interface to manage various aspects of Red Hat JBoss Data Virtualization instances, including the ability to design virtual databases and interact with associated governance repositories. Data Virtualization tooling support is not yet available (scheduled for the autumn).</p>
-      </div>
-      <div class="ulist">
-      <ul>
-      <li>
-      <p><a href="https://tools.jboss.org/features/teiiddesigner.html">Teiid Designer</a> - A visual tool that enables rapid, model-driven definition, integration, management and testing of data services without programming using the Teiid runtime framework.</p>
-      </li>
-      </ul>
-      </div>
-      </div>
-      <div class="sect2">
-      <h3 id="jboss-integration-and-soa-development"><a class="anchor" href="#jboss-integration-and-soa-development"></a>JBoss Integration and SOA Development</h3>
-      <div class="paragraph">
-      <p>JBoss Integration and SOA Development plug-ins provide tooling for developing, configuring and deploying BRMS and SwitchYard to Red Hat JBoss Fuse and Fuse Fabric containers.</p>
-      </div>
-      <div class="ulist">
-      <ul>
-      <li>
-      <p>All of the Business Process and Rules Development plugins plus SwitchYard. Switchyard is deprecated as of this release.</p>
-      </li>
-      <li>
-      <p><a href="https://tools.jboss.org/features/fusetools.html">Fuse Tooling</a> has moved out of the Integration Stack to be a core part of JBoss Tools and Developer Studio.</p>
-      </li>
-      </ul>
-      </div>
-      </div>
-      <div class="sect2">
-      <h3 id="the-jboss-tools-website-features-tab"><a class="anchor" href="#the-jboss-tools-website-features-tab"></a>The JBoss Tools website features tab</h3>
-      <div class="paragraph">
-      <p>Don’t miss the <a href="https://tools.jboss.org/features">Features tab</a> for up to date information on your favorite Integration Stack components.</p>
-      </div>
-      </div>
-      </div>
-      </div>
-      <div class="sect1">
-      <h2 id="installation"><a class="anchor" href="#installation"></a>Installation</h2>
-      <div class="sectionbody">
-      <div class="paragraph">
-      <p>The easiest way to install the Integration Stack components is through the <a href="https://access.redhat.com/jbossnetwork/restricted/listSoftware.html?downloadType=distributions&amp;product=jbossdeveloperstudio&amp;version=11.0.0">stand-alone installer</a>.</p>
-      </div>
-      <div class="paragraph">
-      <p>For a complete set of Integration Stack installation instructions, see <a href="https://access.redhat.com/documentation/en/red-hat-jboss-developer-studio-integration-stack/10.0/paged/installation-guide/">Integration Stack Installation Instructions</a></p>
-      </div>
-      <div class="paragraph">
-      <p><em>Be the first to try it on Oxygen!</em></p>
-      </div>
-      <div class="paragraph">
-      <p>Paul Leacu.</p>
-      </div>
-      </div>
-      </div></div>
-    ]]></summary>
-	<content type="html">&lt;html&gt;&lt;body&gt;&lt;div&gt;&lt;div&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;p&gt;&lt;strong&gt;Try our complete Eclipse Oxygen and Red Hat JBoss Developer Studio 11 compatible integration tooling.&lt;/strong&gt;&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;img src="https://tools.jboss.org/blog/images/jbosstools-jbdevstudio-blog-header.png" alt="jbosstools jbdevstudio blog header"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;&lt;strong&gt;JBoss Tools Integration Stack 4.5.0.Final / Developer Studio Integration Stack 11.0.0.GA&lt;/strong&gt;&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;table&gt;&lt;tr&gt;&lt;td&gt;
-      &lt;i title="Note"&gt;&lt;/i&gt;
-      &lt;/td&gt;
-      &lt;td&gt;
-      All of the Integration Stack components have been verified to work with the same dependencies as JBoss Tools 4.5 and Developer Studio 11.
-      &lt;/td&gt;
-      &lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h2&gt;&lt;a href="#what-s-new-for-this-release" target="_blank"&gt;&lt;/a&gt;What&amp;rsquo;s new for this release?&lt;/h2&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;p&gt;This is the initial release in support of Eclipse Oxygen.  It syncs up with Developer Studio 11.0.0, JBoss Tools 4.5.0 and Eclipse 4.7.0 (Oxygen.0).  It is also a maintenance release for SwitchYard and BRMS tooling.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;Data Virtualization tooling support is not yet available (scheduled for the autumn).&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;SwitchYard is deprecated in this release.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;&lt;a href="https://tools.jboss.org/features/fusetools.html" target="_blank"&gt;Fuse Tooling&lt;/a&gt; has moved out of the Integration Stack to be a core part of JBoss Tools and Developer Studio.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h3&gt;&lt;a href="#released-tooling-highlights" target="_blank"&gt;&lt;/a&gt;Released Tooling Highlights&lt;/h3&gt;
-      &lt;div&gt;
-      &lt;h4&gt;&lt;a href="#jboss-business-process-and-rules-development" target="_blank"&gt;&lt;/a&gt;JBoss Business Process and Rules Development&lt;/h4&gt;
-      &lt;div&gt;
-      &lt;h5&gt;&lt;a href="#bpmn2-modeler-known-issues" target="_blank"&gt;&lt;/a&gt;BPMN2 Modeler Known Issues&lt;/h5&gt;
-      &lt;div&gt;
-      &lt;p&gt;See the &lt;a href="https://access.redhat.com/documentation/en-us/red_hat_jboss_developer_studio_integration_stack/11.0/html/11.0.0_release_notes_and_known_issues/known_issues#bpmn2_1_4_0_final_2" target="_blank"&gt;BPMN2 1.4.0.Final Known Issues Section&lt;/a&gt; of the Integration Stack 11.0.0.GA release notes.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h5&gt;&lt;a href="#drools-jbpm6-known-issues" target="_blank"&gt;&lt;/a&gt;Drools/jBPM6 Known Issues&lt;/h5&gt;
-      &lt;div&gt;
-      &lt;p&gt;See the &lt;a href="https://access.redhat.com/documentation/en-us/red_hat_jboss_developer_studio_integration_stack/11.0/html/11.0.0_release_notes_and_known_issues/known_issues#drools_7_0_1_final_2" target="_blank"&gt;Drools 7.0.1.Final Known Issues Section&lt;/a&gt; of the Integration Stack 11.0.0.GA release notes.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h5&gt;&lt;a href="#switchyard-highlights" target="_blank"&gt;&lt;/a&gt;SwitchYard Highlights&lt;/h5&gt;
-      &lt;div&gt;
-      &lt;p&gt;See the &lt;a href="https://access.redhat.com/documentation/en-us/red_hat_jboss_developer_studio_integration_stack/11.0/html/11.0.0_release_notes_and_known_issues/known_issues#switchyard_2_4_0_final_2" target="_blank"&gt;SwitchYard 2.4.0.Final Resolved Issues Section&lt;/a&gt; of the Integration Stack 11.0.0.GA release notes.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h4&gt;&lt;a href="#data-virtualization-highlights" target="_blank"&gt;&lt;/a&gt;Data Virtualization Highlights&lt;/h4&gt;
-      &lt;div&gt;
-      &lt;h5&gt;&lt;a href="#teiid-designer" target="_blank"&gt;&lt;/a&gt;Teiid Designer&lt;/h5&gt;
-      &lt;div&gt;
-      &lt;p&gt;Not yet available for Oxygen.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h2&gt;&lt;a href="#what-s-an-integration-stack" target="_blank"&gt;&lt;/a&gt;What&amp;rsquo;s an Integration Stack?&lt;/h2&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;p&gt;Red Hat JBoss Developer Studio Integration Stack is a set of Eclipse-based development tools. It further enhances the IDE functionality provided by JBoss Developer Studio, with plug-ins specifically for use when developing for other Red Hat JBoss products.  It&amp;rsquo;s where DataVirt Tooling, SOA tooling and BRMS tooling are aggregated.  The following frameworks are supported:&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h3&gt;&lt;a href="#jboss-business-process-and-rules-development-2" target="_blank"&gt;&lt;/a&gt;JBoss Business Process and Rules Development&lt;/h3&gt;
-      &lt;div&gt;
-      &lt;p&gt;JBoss Business Process and Rules Development plug-ins provide design, debug and testing tooling for developing business processes for Red Hat JBoss BRMS and Red Hat JBoss BPM Suite.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;ul&gt;&lt;li&gt;
-      &lt;p&gt;&lt;a href="https://tools.jboss.org/features/bpel.html" target="_blank"&gt;BPEL Designer&lt;/a&gt; - Orchestrating your business processes.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;&lt;a href="https://tools.jboss.org/features/bpmn2.html" target="_blank"&gt;BPMN2 Modeler&lt;/a&gt; - A graphical modeling tool which allows creation and editing of Business Process Modeling Notation diagrams using graphiti.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;&lt;a href="https://tools.jboss.org/features/drools.html" target="_blank"&gt;Drools&lt;/a&gt; - A Business Logic integration Platform which provides a unified and integrated platform for Rules, Workflow and Event Processing including KIE.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;&lt;a href="https://tools.jboss.org/features/jbpm.html" target="_blank"&gt;jBPM6&lt;/a&gt; - A flexible Business Process Management (BPM) suite.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;/ul&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h3&gt;&lt;a href="#jboss-data-virtualization-development" target="_blank"&gt;&lt;/a&gt;JBoss Data Virtualization Development&lt;/h3&gt;
-      &lt;div&gt;
-      &lt;p&gt;JBoss Data Virtualization Development plug-ins provide a graphical interface to manage various aspects of Red Hat JBoss Data Virtualization instances, including the ability to design virtual databases and interact with associated governance repositories. Data Virtualization tooling support is not yet available (scheduled for the autumn).&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;ul&gt;&lt;li&gt;
-      &lt;p&gt;&lt;a href="https://tools.jboss.org/features/teiiddesigner.html" target="_blank"&gt;Teiid Designer&lt;/a&gt; - A visual tool that enables rapid, model-driven definition, integration, management and testing of data services without programming using the Teiid runtime framework.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;/ul&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h3&gt;&lt;a href="#jboss-integration-and-soa-development" target="_blank"&gt;&lt;/a&gt;JBoss Integration and SOA Development&lt;/h3&gt;
-      &lt;div&gt;
-      &lt;p&gt;JBoss Integration and SOA Development plug-ins provide tooling for developing, configuring and deploying BRMS and SwitchYard to Red Hat JBoss Fuse and Fuse Fabric containers.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;ul&gt;&lt;li&gt;
-      &lt;p&gt;All of the Business Process and Rules Development plugins plus SwitchYard. Switchyard is deprecated as of this release.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;&lt;a href="https://tools.jboss.org/features/fusetools.html" target="_blank"&gt;Fuse Tooling&lt;/a&gt; has moved out of the Integration Stack to be a core part of JBoss Tools and Developer Studio.&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;/ul&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h3&gt;&lt;a href="#the-jboss-tools-website-features-tab" target="_blank"&gt;&lt;/a&gt;The JBoss Tools website features tab&lt;/h3&gt;
-      &lt;div&gt;
-      &lt;p&gt;Don&amp;rsquo;t miss the &lt;a href="https://tools.jboss.org/features" target="_blank"&gt;Features tab&lt;/a&gt; for up to date information on your favorite Integration Stack components.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h2&gt;&lt;a href="#installation" target="_blank"&gt;&lt;/a&gt;Installation&lt;/h2&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;p&gt;The easiest way to install the Integration Stack components is through the &lt;a href="https://access.redhat.com/jbossnetwork/restricted/listSoftware.html?downloadType=distributions&amp;amp;product=jbossdeveloperstudio&amp;amp;version=11.0.0" target="_blank"&gt;stand-alone installer&lt;/a&gt;.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;For a complete set of Integration Stack installation instructions, see &lt;a href="https://access.redhat.com/documentation/en/red-hat-jboss-developer-studio-integration-stack/10.0/paged/installation-guide/" target="_blank"&gt;Integration Stack Installation Instructions&lt;/a&gt;&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;&lt;em&gt;Be the first to try it on Oxygen!&lt;/em&gt;&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;Paul Leacu.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;
-&lt;img src="http://feeds.feedburner.com/~r/jbossbuzz/~4/2tzRZzqKxVk" height="1" width="1" alt=""/&gt;</content>
-	<updated>2017-08-21T14:14:44+00:00</updated>
-	<author><name>pleacu</name></author>
-	<source>
-		<link rel="self" href="http://tools.jboss.org/blog/" />
-		<title>JBoss Tools</title></source>
-
-	<category term="release" />
-
-	<category term="jbosstools" />
-
-	<category term="devstudio" />
-
-	<category term="jbosscentral" />
-
-
-<feedburner:origLink>https://tools.jboss.org/blog/integration-stack-4.5.0.Final.html</feedburner:origLink></entry>
 
 
 </feed><!-- vim:ft=xml

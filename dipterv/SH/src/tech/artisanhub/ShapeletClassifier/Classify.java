@@ -19,6 +19,7 @@ import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
 import tech.artisanhub.ShapeletTrainerMD.LearnShapeletsMD;
 import tech.artisanhub.ShapeletTrainerMD.LogProcessorMD;
 import tech.artisanhub.ShapeletTrainerMD.ShapeletFilterMD;
+import tech.artisanhub.ShapeletTrainerMD.TimeSeriesMD;
 import weka.core.Instance;
 import weka.core.Instances;
 
@@ -91,7 +92,7 @@ public class Classify {
 			sh = ShapeletFilterMD.zNorm(sh, false);
 		}
 
-		Instances dataSet = ShapeletFilter.loadData(CSVtoARFF.OUTPUT_DATA);
+		TimeSeriesMD[] dataSet = ShapeletFilterMD.loadData(prop.get("inputDataFileNameCsv").toString());
 
 		BufferedWriter writer = null;
 
@@ -103,11 +104,11 @@ public class Classify {
 			Double d = Double.parseDouble(prop.getProperty("dimension").toString());
 			int dim = d.intValue();
 
-			for (int i = 0; i < dataSet.numInstances(); i++) {
+			for (int i = 0; i < dataSet.length; i++) {
 				// azért 1tõl,mert a 0. sor a dimenzió
 				// params: 1 idõsor, shapelet, shapelethez tartozó osztály,
 				// shapelethez tartozó threshold, idõsorok elemeinek dimenziója
-				writer.write(cl.classifyLine(dataSet.instance(i), sh, cls, th, dim));
+				writer.write(cl.classifyLine(dataSet[i].getDoubleVector(), sh, cls, th, dim));
 				writer.newLine();
 			}
 

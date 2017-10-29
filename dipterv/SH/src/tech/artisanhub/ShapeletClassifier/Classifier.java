@@ -28,6 +28,7 @@ public class Classifier {
         if (dist <= th) return (shClass); //shClass = class of the shapelet
 		else return ("NOT " + shClass);
 	}
+
 	
 	//fv1: input-mx vagy csúszóablak tartalma mátrixban....
 	//soronként meghívja fv2-t

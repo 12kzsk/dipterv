@@ -52,8 +52,8 @@ public class TimeSerieClassifier {
 					lastFoundShapelet = 0;
 				else if(lastFoundShapelet!=-1)
 					lastFoundShapelet++;
-				
-				if (lastFoundShapelet > DroolsTest.drTsLength){
+
+				if (lastFoundShapelet > (DroolsTest.drTsLength - DroolsTest.shapelet.length)){
 					isCrit = true;
 				}
 			}
@@ -64,14 +64,26 @@ public class TimeSerieClassifier {
 		{
 		    String filename= "result.csv";
 		    FileWriter fw = new FileWriter(filename,true); //the true will append the new data
-		    fw.write(vector.getElement(0) + "," + vector.getElement(1) + ",1.0," + lastFoundShapelet + "\n");//appends the string to the file
+		    
+			String isShapelet = "0";
+		    if (lastFoundShapelet < DroolsTest.shapelet.length) isShapelet = "1";
+		    
+		    String isCritString = "0";
+		    if (isCrit) isCritString = "1";
+		    
+		    //TODO: 2dim be van drótozva!!!!
+		    //inputvector elsõ eleme, inputvector 2. eleme, van-e shapelet, hol van a vége a shapeletnek
+		    if (isShapelet.equals("1") && lastFoundShapelet!=-1)
+		    	fw.write(vector.getElement(0) + "," + vector.getElement(1) + "," + DroolsTest.shapelet[lastFoundShapelet].getElement(0) + "," + DroolsTest.shapelet[lastFoundShapelet].getElement(1) + "," + isCritString + "\n");//appends the string to the file
+		    else //ha nincs shapelet éppen
+		    	fw.write(vector.getElement(0) + "," + vector.getElement(1) + ",0,0," + isCritString + "\n");//appends the string to the file
 		    fw.close();
 		}
 		catch(IOException ioe)
 		{
 		    System.err.println("IOException: " + ioe.getMessage());
 		}
-		
+		System.out.println(isCrit);
 		return isCrit;
 	}
 /*	

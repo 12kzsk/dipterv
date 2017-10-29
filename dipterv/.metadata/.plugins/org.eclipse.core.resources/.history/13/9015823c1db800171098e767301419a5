@@ -1,0 +1,39 @@
+package com.sample
+ 
+import com.sample.DroolsTest.LogItem;
+import com.sample.TimeSerieClassifier;
+
+rule "criticalHeartBeat"
+    when
+        LogItem(item : getLogItem())
+        eval(TimeSerieClassifier.isCriticalHeart(item))
+    then
+        System.out.println(item.getElement(0) + "," + item.getElement(1));
+end
+
+/*rule "criticalFlight"
+    when
+        LogItem(item : getLogItem())
+        eval(TimeSerieClassifier.isCriticalFlight(item))
+    then
+        System.out.println( "kritikus" );
+        System.out.println("A " + item.getElement(1) + ". hónapot követõ hónap lesz kritikus a reptéri forgalom.");
+end
+*/
+/*
+rule "normal"
+    when
+        LogItem(item : getLogItem())
+        eval(!TimeSerieClassifier.isCritical(item))
+    then
+        System.out.println( "normal" );
+end
+
+/*
+rule "GoodBye"
+    when
+        Message( status == Message.GOODBYE, myMessage : message )
+    then
+        System.out.println( myMessage );
+end
+*/

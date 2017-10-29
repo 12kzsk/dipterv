@@ -15,6 +15,7 @@ import org.kie.api.runtime.KieSession;
 
 import tech.artisanhub.ShapeletTrainerMD.CSVReader;
 import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
+import tech.artisanhub.ShapeletTrainerMD.LearnShapeletsMD;
 import tech.artisanhub.ShapeletTrainerMD.ShapeletFilterMD;
 
 /**
@@ -26,7 +27,7 @@ public class DroolsTest {
 	public static double th = -1; //threshold
 	public static String cls = "";
 	public static Integer dimension;
-	public static Integer drTsLength;
+	public static Integer drTsLength = 75; //TODO: param
 
     public static final void main(String[] args) {
         try {
@@ -48,6 +49,7 @@ public class DroolsTest {
     		TimeSerieClassifier.vectors = null;
     				
         	String shapeletSource = prop.getProperty("bestShapeletsFileName");
+        	LearnShapeletsMD.vectorSize = Integer.parseInt(prop.getProperty("dimension"));
 
     		String line;
 
@@ -77,10 +79,11 @@ public class DroolsTest {
     		} catch (Exception e) {}
     		
     		//normalize shapelet
+    		//System.out.println(shapelet.length + "," + shapelet[0]);
     		shapelet = ShapeletFilterMD.zNorm(shapelet, false);
     		
         	//get input
-        	ArrayList<ArrayList<String>> lines = CSVReader.read("input.csv", ";");
+        	ArrayList<ArrayList<String>> lines = CSVReader.read(prop.getProperty("droolsInput"), ",");
         	
             // go !
     		dimension = new Integer(prop.get("dimension").toString());

@@ -26,4 +26,6 @@
 <fullyQualifiedTypeName name="weka.core.Instance"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="tech.artisanhub.ShapeletTrainerMD.ShapeletFilterMD"/>
+<fullyQualifiedTypeName name="tech.artisanhub.ShapeletTrainerMD.TimeSeriesMD"/>
+<fullyQualifiedTypeName name="java.io.FileWriter"/>
 </qualifiedTypeNameHistroy>
