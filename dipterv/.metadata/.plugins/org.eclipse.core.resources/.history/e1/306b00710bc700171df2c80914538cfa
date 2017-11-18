@@ -1,0 +1,52 @@
+package tech.artisanhub.ShapeletTrainerMD;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Properties;
+import libsvm.*;
+
+import tech.artisanhub.ShapeletTrainer1D.ShapeletInputTester;
+
+public class LogBasedShapeletTrainerMDTelco {
+
+	//Main fv.: a log alapján megtalálja a shapeleteket
+	//Innen hívódik ennek a folyamatnak minden része
+	public static void main(String[] args) throws Exception {
+		//config file-ban a paraméterek nevei:
+		//a fájl nevek végzõdéssel együtt vannak megadva
+		/*
+		 	logFileName
+			trainingDataFileNameCsv
+			trainingDataFileNameArff
+			shapeletsFileName
+			minShapeletLength
+			maxShapeletLength
+			dimension
+			targetVariable
+			criticalThreshold
+			inputVariables (splitted: ,)
+		 */
+
+		svm s = new svm();
+		svm_problem problem = new svm_problem();
+		problem.l = 1; //a bejövõ adatok hossza
+		problem.x = svm_node[][];
+		problem.y = 3;
+		svm_parameter param = new svm_parameter();
+		param.
+		s.svm_train(problem, param);
+		
+		//propertyk lekérdezése:
+		/*	
+			Properties prop = new Properties();
+			InputStream input = null;
+			input = new FileInputStream("config.properties");
+			prop.load(input);
+		*/
+
+		LogProcessorMD.main(args);
+	
+	}
+
+}

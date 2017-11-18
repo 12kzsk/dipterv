@@ -1,0 +1,13 @@
+package com.sample
+ 
+import com.sample.svm.DroolsTestSVM.LogItemSVM;
+import com.sample.svm.SVMClassifier;
+
+rule "criticalHeartBeat"
+    when
+        LogItem(item : getLogItem())
+        eval(SVMClassifier.isCriticalHeart(item))
+    then
+        //System.out.println(item.getElement(0) + "," + item.getElement(1) + ",1.0," + TimeSerieClassifier.lastFoundShapelet);
+        System.out.println("Riasztás");
+end

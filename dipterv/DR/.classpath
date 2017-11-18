@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/jcommon-1.0.8.jar"/>
 	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/jfreechart.jar"/>
 	<classpathentry kind="lib" path="E:/BME/MSc/5.felev/dipterv1/impl/weka.jar"/>
+	<classpathentry kind="lib" path="E:/BME/MSc/6.felev/dipterv2/codes/libsvm-3.17-sources/libsvm.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

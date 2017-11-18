@@ -17,7 +17,7 @@ import tech.artisanhub.ARFFGenerator.CSVtoARFF;
 import tech.artisanhub.ShapeletTrainer1D.ShapeletFilter;
 import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
 import tech.artisanhub.ShapeletTrainerMD.LearnShapeletsMD;
-import tech.artisanhub.ShapeletTrainerMD.LogProcessorMD;
+import tech.artisanhub.ShapeletTrainerMD.LogProcessorMDShapelet;
 import tech.artisanhub.ShapeletTrainerMD.ShapeletFilterMD;
 import tech.artisanhub.ShapeletTrainerMD.TimeSeriesMD;
 import weka.core.Instance;

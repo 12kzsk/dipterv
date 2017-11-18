@@ -1,0 +1,13 @@
+package com.sample
+ 
+import com.sample.DroolsTest.LogItem;
+import com.sample.TimeSerieClassifier;
+
+rule "criticalHeartBeat"
+    when
+        LogItem(item : getLogItem())
+        eval(TimeSerieClassifier.isCriticalHeart(item))
+    then
+        //System.out.println(item.getElement(0) + "," + item.getElement(1) + ",1.0," + TimeSerieClassifier.lastFoundShapelet);
+        System.out.println("Riasztás");
+end

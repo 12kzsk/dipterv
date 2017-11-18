@@ -27,7 +27,7 @@ public class DroolsTest {
 	public static double th = -1; //threshold
 	public static String cls = "";
 	public static Integer dimension;
-	public static Integer drTsLength = 75; //TODO: param
+	public static Integer drTsLength = 120; //TODO: param
 
     public static final void main(String[] args) {
         try {

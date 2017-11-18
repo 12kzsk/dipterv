@@ -1,0 +1,12 @@
+package com.sample
+ 
+import com.sample.svm.DroolsTestSVM.LogItemSVM;
+import com.sample.svm.SVMClassifier;
+
+rule "critical"
+    when
+        LogItemSVM(item : getLogItemSVM())
+        eval(SVMClassifier.isCriticalSVM(item))
+    then
+        System.out.println("Riasztás");
+end

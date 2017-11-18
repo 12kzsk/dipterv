@@ -1,0 +1,32 @@
+package com.sample.svm;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import libsvm.svm_node;
+import tech.artisanhub.ShapeletClassifier.Classifier;
+import tech.artisanhub.ShapeletTrainerMD.DoubleVectorMD;
+import weka.core.Instance;
+import weka.core.SparseInstance;
+
+public class SVMClassifier {
+
+	public static int vecSize = 0;
+	
+	public static boolean isCritialSVM(DoubleVectorMD vector) throws FileNotFoundException, IOException {
+		boolean isCrit = false;
+
+		svm_node[] x = new svm_node[dimension];
+		for(int j=0;j<m;j++)
+		{
+			x[j] = new svm_node();
+			x[j].index = atoi(st.nextToken());
+			x[j].value = atof(st.nextToken());
+		}
+		
+		return isCrit;
+	}
+}
