@@ -17,9 +17,11 @@ import weka.core.SparseInstance;
 
 public class SVMClassifier {
 
+	public static int count = 0;
+    
 	public static boolean isCriticalSVM(DoubleVectorMD vector) throws FileNotFoundException, IOException {
 		boolean isCrit = false;
-
+		
 		int m = vector.getDoubleVector().length;
 		svm_node[] x = new svm_node[m];
 		for(int j=0;j<m;j++)
@@ -42,8 +44,9 @@ public class SVMClassifier {
 		    
 		    String isCritString = "0";
 		    if (isCrit) isCritString = "1";
-		    
-		    fw.write(vector.getDoubleVector()[0] + "," + vector.getDoubleVector()[1] + "," + vector.getDoubleVector()[2] + "," + isCritString + "\n");//appends the string to the file
+		    count++;
+		    //THRESHOLD BE VAN ÉGETVE TODO és a 20-szal felszorzás is!!!!
+		    fw.write(vector.getDoubleVector()[0] + "," + vector.getDoubleVector()[1] + "," + vector.getDoubleVector()[2] + "," + (Integer.parseInt(isCritString)*20) + "," + count + ",600" +  "\n");//appends the string to the file
 		    fw.close();
 		}
 		catch(IOException ioe)

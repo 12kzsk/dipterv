@@ -28,4 +28,5 @@
 <fullyQualifiedTypeName name="tech.artisanhub.ShapeletTrainerMD.ShapeletFilterMD"/>
 <fullyQualifiedTypeName name="tech.artisanhub.ShapeletTrainerMD.TimeSeriesMD"/>
 <fullyQualifiedTypeName name="java.io.FileWriter"/>
+<fullyQualifiedTypeName name="libsvm.svm_parameter"/>
 </qualifiedTypeNameHistroy>

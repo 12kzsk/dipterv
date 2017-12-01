@@ -18,6 +18,82 @@ public class TimeSerieClassifier {
 	public static int lastFoundShapelet = -1;
 	//hány adattal ezelõtt találtunk shapeletet (az utolsó karakterre vonatkozik)
 	
+	public static boolean isCriticalEye(DoubleVectorMD vector) throws FileNotFoundException, IOException {
+		boolean isCrit = false;
+		
+		int shLength = DroolsTest.shapelet.length;
+		
+		// vector tömb rendezése
+		if (vectors == null)
+			vectors = new DoubleVectorMD[shLength];
+		if (vecSize < shLength) {
+			vectors[vecSize] = vector;
+			vecSize++;
+		} else {
+			for (int i = 0; i < shLength-1; i++) {
+				vectors[i] = vectors[i + 1];
+			}
+			vectors[shLength-1] = vector;
+
+			// kritikus-e?
+			Classifier cl = new Classifier();
+
+			//DroolsTest.cls = a shapelet milyen osztályú sorból lett kiszedve
+			String cls = cl.classifyLine(vectors, DroolsTest.shapelet, DroolsTest.cls, DroolsTest.th, DroolsTest.dimension);
+
+			if(cls.equals(DroolsTest.cls))
+				lastFoundShapelet = 0;
+			else if(lastFoundShapelet!=-1)
+				lastFoundShapelet++;
+
+			if (DroolsTest.cls.equals("1.0")){
+				if(cls.equals("1.0"))
+					isCrit = true;
+				else
+					isCrit = false;
+			}
+			else if(DroolsTest.cls.equals("0.0")) {
+
+				if (lastFoundShapelet > (DroolsTest.drTsLength - DroolsTest.shapelet.length)){
+					isCrit = true;
+				}
+			}
+			else System.out.println("Egyik osztályú sem volt, valami baj van.");
+		}
+		
+		try
+		{
+		    String filename= "result.csv";
+		    FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+		    
+			String isShapelet = "0";
+		    if (lastFoundShapelet < DroolsTest.shapelet.length) isShapelet = "1";
+		    
+		    String isCritString = "0";
+		    if (isCrit) isCritString = "1";
+		    
+		    //TODO: 2dim be van drótozva!!!!
+		    //inputvector elsõ eleme, inputvector 2. eleme, van-e shapelet, hol van a vége a shapeletnek
+		    /*if (isShapelet.equals("1") && lastFoundShapelet!=-1)
+		    	fw.write(vectors[0].getElement(0) + "," + vectors[0].getElement(1) + "," + DroolsTest.shapelet[lastFoundShapelet].getElement(0) + "," + DroolsTest.shapelet[lastFoundShapelet].getElement(1) + "," + isCritString + "\n");//appends the string to the file
+		    else //ha nincs shapelet éppen
+		    	fw.write(vectors[0].getElement(0) + "," + vectors[0].getElement(1) + ",0,0," + isCritString + "\n");//appends the string to the file
+		    	*/
+		    if (isShapelet.equals("1") && lastFoundShapelet!=-1)
+		    	fw.write(vectors[0].getElement(0) + "," + DroolsTest.shapelet[lastFoundShapelet].getElement(0) + "," + isCritString + "\n");//appends the string to the file
+		    else //ha nincs shapelet éppen
+		    	fw.write(vectors[0].getElement(0) + ",0," + isCritString + "\n");//appends the string to the file
+		    fw.close();
+		}
+		catch(IOException ioe)
+		{
+		    System.err.println("IOException: " + ioe.getMessage());
+		}
+		//System.out.println(isCrit);
+		return isCrit;
+	}
+	
+	/*
 	public static boolean isCriticalHeart(DoubleVectorMD vector) throws FileNotFoundException, IOException {
 		boolean isCrit = false;
 		

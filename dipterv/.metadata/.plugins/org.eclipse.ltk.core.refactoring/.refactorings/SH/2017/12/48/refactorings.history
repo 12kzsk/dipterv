@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;SH&apos;&#x0D;&#x0A;- Original project: &apos;SH&apos;&#x0D;&#x0A;- Destination element: &apos;SH&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     EEG_Eye_State_short.arff&#x0D;&#x0A;     EEG_Eye_State.arff" description="Copy files" destination="=SH" element1="randomdataset/EEG_Eye_State_short.arff" element2="randomdataset/EEG_Eye_State.arff" files="2" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1512127191595" units="0" version="1.0"/>
+</session>
